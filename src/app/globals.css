@@ -11,16 +11,16 @@ body {
 .gradient-transparent {
   background-image: linear-gradient(
     to bottom,
-    rgba(255, 0, 0, 0),
-    rgb(240, 255, 240, 1) 90%
+    rgba(240, 255, 240, 0.3) 35%,
+    rgb(240, 255, 240, 1)
   );
 }
 .white-transparent {
-  background-color: rgba(220, 180, 255, 0.4);
+  background-color: rgba(97, 255, 181, 0.2);
 }
 .backdrop-filter {
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(6px);
 }
 .gap-hero {
-  gap: 4rem 1rem;
+  gap: 0 0.9rem;
 }

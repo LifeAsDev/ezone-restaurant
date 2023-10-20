@@ -31,7 +31,7 @@ export default function Home() {
       </nav>
       <section className="mt-[2rem] px-[2rem]">
         <div className="flex flex-row gap-[0.65rem]">
-          <div className="w-[50%] flex flex-col">
+          <div className="w-[50%] flex flex-col gap-3 justify-center">
             <div className="w-[11.30rem] gap-[.5rem] h-[2.5rem] bg-[#cdfac0] rounded-full flex items-center px-[.80rem]">
               <p className="text-[#46cc21] font-[700]">Bike Delivery</p>
               <div className="bg-white rounded-[50%] w-[2rem] h-[2rem] flex justify-center items-center">
@@ -43,82 +43,118 @@ export default function Home() {
                 />
               </div>
             </div>
-            <h2 className="text-[4rem] font-[700]">
+            <h1 className="text-[4rem] font-[700]">
               The Fastest Food Delivery in
               <span className="text-[#3bc416] text-[4.6rem]"> Manaus</span>
-            </h2>
-            <p className="font-[450]  text-[#808080]">
+            </h1>
+            <p className="font-[480]  text-[#808080] w-[90%]">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
               nam delectus sed, vel quaerat, libero nesciunt debitis, architecto
               repudiandae accusamus aut exercitationem nisi non doloribus!
               Temporibus officia architecto reiciendis blanditiis.
             </p>
-            <div className="absolute backdrop-blur	 gap-2 pb-3 drop-shadow-xl white-transparent w-[13rem] h-[14rem] flex justify-center flex-col items-center rounded-xl">
-              <Image
-                className="absolute top-[-3.5rem] "
-                src={"/img/f8.png"}
-                height={160}
-                width={160}
-                alt="motorcycle delivery"
-              />
-              <p className="mt-24 text-[#6b6b6b] font-[650] text-[1.2rem]">
-                Strawberries
-              </p>
-              <p className="text-[#808080] font-[650] text-[1.1rem]">
-                Fresh Strawberries
-              </p>
-              <p className="text-[1rem] font-semibold text-[#303030]">
-                <span className="text-red-600">$</span> 7.25
-              </p>
+            <div className="select-none cursor-pointer mt-[1rem] bg-[#46cc21] block p-[.8rem] py-[.6rem] rounded-md w-[7.25rem]">
+              Order Now
             </div>
           </div>
           <div className="w-[50%] relative">
             <Image
-              className="rounded-[20px]  z-[-1]  ml-auto lg:h-[550px] h-[420px] w-full lg:w-auto absolute right-0"
+              className="rounded-[20px]  z-[-1]  ml-auto lg:h-[550px] h-[420px] w-full lg:w-auto right-0"
               src={"/img/hero.jpg"}
               height={736}
               width={460}
               alt="motorcycle delivery"
             />
-            <div className="w-[344px] z-[-1] absolute gradient-transparent rounded-[20px] ml-auto lg:h-[550px] h-[420px] right-0"></div>
-            <div className="mt-12 absolute w-full h-full flex flex-wrap justify-center items-center gap-hero ">
-              <div className="	  gap-2 pb-3 drop-shadow-xl white-transparent w-[13rem] h-[14rem] flex justify-center flex-col items-center rounded-xl">
+            <div className="w-[344px] z-[1] absolute gradient-transparent rounded-[20px] ml-auto lg:h-[550px] h-[420px] top-0 right-0"></div>
+            <div className="absolute z-[1] w-full h-full flex flex-wrap justify-center items-center gap-hero top-0">
+              <div className="relative gap-2 w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
+                <div className="z-[-1] absolute backdrop-blur-sm drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
                 <Image
-                  className="absolute top-[-3.5rem] "
+                  className="absolute bottom-[6.5rem] "
                   src={"/img/f8.png"}
-                  height={160}
-                  width={160}
+                  height={140}
+                  width={140}
                   alt="motorcycle delivery"
                 />
-                <p className="mt-24 text-[#6b6b6b] font-[650] text-[1.2rem]">
+                <p className="mt-24 text-[#545454] font-[650] text-[1.2rem]">
                   Cerezas
                 </p>
-                <p className="text-[#808080] font-[650] text-[1.1rem]">
+                <p className="text-[#808080] font-[650] text-[1rem]">
                   Cerezas Frescas
                 </p>
-                <p className="text-[1rem] font-semibold text-[#303030]">
+                <p className="mb-4 text-[1rem] font-semibold text-[#303030]">
                   <span className="text-red-600">$</span> 7.25
                 </p>
               </div>
-              <div className="backdrop-filter gap-2 pb-3 drop-shadow-xl white-transparent w-[13rem] h-[14rem] flex justify-center flex-col items-center rounded-xl">
+              <div className="relative gap-2 w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
+                <div className="z-[-1] absolute backdrop-blur-sm drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
                 <Image
-                  className="absolute top-[-3.5rem] "
-                  src={"/img/f7.png"}
-                  height={160}
-                  width={160}
+                  className="absolute bottom-[6.5rem] "
+                  src={"/img/f8.png"}
+                  height={140}
+                  width={140}
                   alt="motorcycle delivery"
                 />
-                <p className="mt-24 text-[#6b6b6b] font-[650] text-[1.2rem]">
-                  Frambuesas
+                <p className="mt-24 text-[#545454] font-[650] text-[1.2rem]">
+                  Cerezas
                 </p>
-                <p className="text-[#808080] font-[650] text-[1.1rem]">
-                  Frambuesas Frescas
+                <p className="text-[#808080] font-[650] text-[1rem]">
+                  Cerezas Frescas
                 </p>
-                <p className="text-[1rem] font-semibold text-[#303030]">
+                <p className="mb-4 text-[1rem] font-semibold text-[#303030]">
+                  <span className="text-red-600">$</span> 7.25
+                </p>
+              </div>
+              <div className="relative gap-2 w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
+                <div className="z-[-1] absolute backdrop-blur-sm drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
+                <Image
+                  className="absolute bottom-[6.5rem] "
+                  src={"/img/f8.png"}
+                  height={140}
+                  width={140}
+                  alt="motorcycle delivery"
+                />
+                <p className="mt-24 text-[#545454] font-[650] text-[1.2rem]">
+                  Cerezas
+                </p>
+                <p className="text-[#808080] font-[650] text-[1rem]">
+                  Cerezas Frescas
+                </p>
+                <p className="mb-4 text-[1rem] font-semibold text-[#303030]">
+                  <span className="text-red-600">$</span> 7.25
+                </p>
+              </div>
+              <div className="relative gap-2 w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
+                <div className="z-[-1] absolute backdrop-blur-sm drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
+                <Image
+                  className="absolute bottom-[6.5rem] "
+                  src={"/img/f8.png"}
+                  height={140}
+                  width={140}
+                  alt="motorcycle delivery"
+                />
+                <p className="mt-24 text-[#545454] font-[650] text-[1.2rem]">
+                  Cerezas
+                </p>
+                <p className="text-[#808080] font-[650] text-[1rem]">
+                  Cerezas Frescas
+                </p>
+                <p className="mb-4 text-[1rem] font-semibold text-[#303030]">
                   <span className="text-red-600">$</span> 7.25
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="mt-[2rem] px-[2rem]">
+        <div className="flex flex-row justify-between">
+          <h2 className="text-[1.5rem] font-[400] relative before:absolute before:rounded before:content before:w-32 before:h-1 before:-bottom-2 before:left-0 before:bg-[#46cc21]">
+            Our Fresh & Healthy Fruits
+          </h2>
+          <div className="flex flex-row gap-3">
+            <ArrowSvg right={false} />
+            <ArrowSvg right={true} />
           </div>
         </div>
       </section>
@@ -152,5 +188,29 @@ function LoginSvg() {
     >
       <path d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z" />
     </svg>
+  );
+}
+function ArrowSvg({ right }) {
+  const direction = right ? "" : "rotate-180";
+  return (
+    <div
+      className={`bg-[#3bc416] rounded-lg w-[2rem] h-[2rem] p-[.5rem] ${direction}`}
+    >
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M9 5L14.15 10C14.4237 10.2563 14.6419 10.5659 14.791 10.9099C14.9402 11.2539 15.0171 11.625 15.0171 12C15.0171 12.375 14.9402 12.7458 14.791 13.0898C14.6419 13.4339 14.4237 13.7437 14.15 14L9 19"
+          stroke="white"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
   );
 }

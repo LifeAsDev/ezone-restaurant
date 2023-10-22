@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { blob } from "stream/consumers";
 
 export default function Home() {
   return (
@@ -67,82 +68,30 @@ export default function Home() {
             />
             <div className="w-[344px] z-[1] absolute gradient-transparent rounded-[20px] ml-auto lg:h-[550px] h-[420px] top-0 right-0"></div>
             <div className="absolute z-[1] w-full h-full flex flex-wrap justify-center items-center gap-hero top-0">
-              <div className="relative gap-2 w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
-                <div className="z-[-1] absolute backdrop-blur-sm drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
-                <Image
-                  className="absolute bottom-[6.5rem] "
-                  src={"/img/f8.png"}
-                  height={140}
-                  width={140}
-                  alt="motorcycle delivery"
-                />
-                <p className="mt-24 text-[#545454] font-[650] text-[1.2rem]">
-                  Cerezas
-                </p>
-                <p className="text-[#808080] font-[650] text-[1rem]">
-                  Cerezas Frescas
-                </p>
-                <p className="mb-4 text-[1rem] font-semibold text-[#303030]">
-                  <span className="text-red-600">$</span> 7.25
-                </p>
-              </div>
-              <div className="relative gap-2 w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
-                <div className="z-[-1] absolute backdrop-blur-sm drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
-                <Image
-                  className="absolute bottom-[6.5rem] "
-                  src={"/img/f8.png"}
-                  height={140}
-                  width={140}
-                  alt="motorcycle delivery"
-                />
-                <p className="mt-24 text-[#545454] font-[650] text-[1.2rem]">
-                  Cerezas
-                </p>
-                <p className="text-[#808080] font-[650] text-[1rem]">
-                  Cerezas Frescas
-                </p>
-                <p className="mb-4 text-[1rem] font-semibold text-[#303030]">
-                  <span className="text-red-600">$</span> 7.25
-                </p>
-              </div>
-              <div className="relative gap-2 w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
-                <div className="z-[-1] absolute backdrop-blur-sm drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
-                <Image
-                  className="absolute bottom-[6.5rem] "
-                  src={"/img/f8.png"}
-                  height={140}
-                  width={140}
-                  alt="motorcycle delivery"
-                />
-                <p className="mt-24 text-[#545454] font-[650] text-[1.2rem]">
-                  Cerezas
-                </p>
-                <p className="text-[#808080] font-[650] text-[1rem]">
-                  Cerezas Frescas
-                </p>
-                <p className="mb-4 text-[1rem] font-semibold text-[#303030]">
-                  <span className="text-red-600">$</span> 7.25
-                </p>
-              </div>
-              <div className="relative gap-2 w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
-                <div className="z-[-1] absolute backdrop-blur-sm drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
-                <Image
-                  className="absolute bottom-[6.5rem] "
-                  src={"/img/f8.png"}
-                  height={140}
-                  width={140}
-                  alt="motorcycle delivery"
-                />
-                <p className="mt-24 text-[#545454] font-[650] text-[1.2rem]">
-                  Cerezas
-                </p>
-                <p className="text-[#808080] font-[650] text-[1rem]">
-                  Cerezas Frescas
-                </p>
-                <p className="mb-4 text-[1rem] font-semibold text-[#303030]">
-                  <span className="text-red-600">$</span> 7.25
-                </p>
-              </div>
+              <ItemsToBuy
+                name="default"
+                imgSrc="/img/f8.png"
+                shortDescription="default"
+                price={12.2}
+              />
+              <ItemsToBuy
+                name="default"
+                imgSrc="/img/f8.png"
+                shortDescription="default"
+                price={12.2}
+              />
+              <ItemsToBuy
+                name="default"
+                imgSrc="/img/f8.png"
+                shortDescription="default"
+                price={12.2}
+              />
+              <ItemsToBuy
+                name="default"
+                imgSrc="/img/f8.png"
+                shortDescription="default"
+                price={12.2}
+              />
             </div>
           </div>
         </div>
@@ -156,6 +105,26 @@ export default function Home() {
             <ArrowSvg right={false} />
             <ArrowSvg right={true} />
           </div>
+        </div>
+        <div className="px-16 py-16 grid grid-rows-1 overflow-x-scroll gap-x-8 fruit-section  bg-[#d2fcd2]">
+          <ItemsToBuy
+            name="default"
+            imgSrc="/img/f8.png"
+            shortDescription="default"
+            price={12.2}
+          />{" "}
+          <ItemsToBuy
+            name="default"
+            imgSrc="/img/f8.png"
+            shortDescription="default"
+            price={12.2}
+          />{" "}
+          <ItemsToBuy
+            name="default"
+            imgSrc="/img/f8.png"
+            shortDescription="default"
+            price={12.2}
+          />{" "}
         </div>
       </section>
     </main>
@@ -190,7 +159,11 @@ function LoginSvg() {
     </svg>
   );
 }
-function ArrowSvg({ right }) {
+
+interface ArrowSvg {
+  right: boolean;
+}
+function ArrowSvg({ right }: ArrowSvg) {
   const direction = right ? "" : "rotate-180";
   return (
     <div
@@ -211,6 +184,42 @@ function ArrowSvg({ right }) {
           stroke-linejoin="round"
         />
       </svg>
+    </div>
+  );
+}
+interface itemsToBuy {
+  imgSrc: string;
+  name: string;
+  shortDescription: string;
+  price: number;
+}
+function ItemsToBuy({ imgSrc, name, shortDescription, price }: itemsToBuy) {
+  return (
+    <div className="relative gap-2 w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
+      <div className="z-[-1] absolute backdrop-blur-[3px] drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
+      <Image
+        className="absolute bottom-[6.5rem] "
+        src={imgSrc}
+        height={130}
+        width={130}
+        alt="motorcycle delivery"
+      />
+      <p className="mt-24 text-[#545454] font-[650] text-[1.2rem]">{name}</p>
+      <p className="text-[#808080] font-[650] text-[1rem]">
+        {shortDescription}
+      </p>
+      <p className="mb-4 text-[1rem] font-semibold text-[#303030]">
+        <span className="text-red-600">$</span> {price}
+      </p>
+      <div className="bottom-[-2rem] absolute rounded-[50%] bg-red-500 p-3">
+        <Image
+          className="w-6"
+          src={"/img/addToCart.png"}
+          height={40}
+          width={40}
+          alt="logo"
+        />
+      </div>
     </div>
   );
 }

@@ -1,7 +1,17 @@
+"use client";
 import Image from "next/image";
-import { blob } from "stream/consumers";
+import React, { useRef, RefObject } from "react";
 
 export default function Home() {
+  const containerRef: RefObject<HTMLDivElement> = useRef(null);
+
+  const scrollRight = (right: boolean) => {
+    const container = containerRef.current;
+    const dir = right ? 208 * 6 : -208 * 6;
+    if (container) {
+      container.scrollLeft += dir; // Ajusta el valor según tu preferencia
+    }
+  };
   return (
     <main>
       <nav className="bg-white px-[6rem] py-[1.5rem] pt-[1.2rem] w-full  flex flex-row justify-between">
@@ -96,17 +106,36 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="mt-[2rem] px-[2rem]">
+      <section className="mt-20 px-[2rem]">
         <div className="flex flex-row justify-between">
           <h2 className="text-[1.5rem] font-[400] relative before:absolute before:rounded before:content before:w-32 before:h-1 before:-bottom-2 before:left-0 before:bg-[#46cc21]">
             Our Fresh & Healthy Fruits
           </h2>
           <div className="flex flex-row gap-3">
-            <ArrowSvg right={false} />
-            <ArrowSvg right={true} />
+            <div onClick={() => scrollRight(false)}>
+              <ArrowSvg right={false} />
+            </div>
+            <div onClick={() => scrollRight(true)}>
+              <ArrowSvg right={true} />
+            </div>
           </div>
         </div>
-        <div className="px-16 py-16 grid grid-rows-1 overflow-x-scroll gap-x-8 fruit-section  bg-[#d2fcd2]">
+        <div
+          ref={containerRef}
+          className="mt-8 px-4 flex items-center w-full overflow-x-scroll min-h-[18rem] gap-x-4 bg-[#d9ffd9] scrollbar-hidden scroll-smooth"
+        >
+          <ItemsToBuy
+            name="default"
+            imgSrc="/img/f8.png"
+            shortDescription="default"
+            price={12.2}
+          />
+          <ItemsToBuy
+            name="default"
+            imgSrc="/img/f8.png"
+            shortDescription="default"
+            price={12.2}
+          />
           <ItemsToBuy
             name="default"
             imgSrc="/img/f8.png"
@@ -118,13 +147,55 @@ export default function Home() {
             imgSrc="/img/f8.png"
             shortDescription="default"
             price={12.2}
-          />{" "}
+          />
+          <ItemsToBuy
+            name="default"
+            imgSrc="/img/f8.png"
+            shortDescription="default"
+            price={12.2}
+          />
           <ItemsToBuy
             name="default"
             imgSrc="/img/f8.png"
             shortDescription="default"
             price={12.2}
           />{" "}
+          <ItemsToBuy
+            name="default"
+            imgSrc="/img/f8.png"
+            shortDescription="default"
+            price={12.2}
+          />
+          <ItemsToBuy
+            name="default"
+            imgSrc="/img/f8.png"
+            shortDescription="default"
+            price={12.2}
+          />
+          <ItemsToBuy
+            name="default"
+            imgSrc="/img/f8.png"
+            shortDescription="default"
+            price={12.2}
+          />{" "}
+          <ItemsToBuy
+            name="default"
+            imgSrc="/img/f8.png"
+            shortDescription="default"
+            price={12.2}
+          />
+          <ItemsToBuy
+            name="default"
+            imgSrc="/img/f8.png"
+            shortDescription="default"
+            price={12.2}
+          />
+          <ItemsToBuy
+            name="default"
+            imgSrc="/img/f8.png"
+            shortDescription="default"
+            price={12.2}
+          />
         </div>
       </section>
     </main>
@@ -167,7 +238,7 @@ function ArrowSvg({ right }: ArrowSvg) {
   const direction = right ? "" : "rotate-180";
   return (
     <div
-      className={`bg-[#3bc416] rounded-lg w-[2rem] h-[2rem] p-[.5rem] ${direction}`}
+      className={`bg-[#3bc416] rounded-lg w-[2.5rem] h-[2.5rem] p-[.5rem] ${direction}`}
     >
       <svg
         width="100%"
@@ -195,8 +266,8 @@ interface itemsToBuy {
 }
 function ItemsToBuy({ imgSrc, name, shortDescription, price }: itemsToBuy) {
   return (
-    <div className="relative gap-2 w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
-      <div className="z-[-1] absolute backdrop-blur-[3px] drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
+    <div className="relative gap-2 min-w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
+      <div className=" absolute backdrop-blur-[3px] drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
       <Image
         className="absolute bottom-[6.5rem] "
         src={imgSrc}
@@ -204,11 +275,13 @@ function ItemsToBuy({ imgSrc, name, shortDescription, price }: itemsToBuy) {
         width={130}
         alt="motorcycle delivery"
       />
-      <p className="mt-24 text-[#545454] font-[650] text-[1.2rem]">{name}</p>
-      <p className="text-[#808080] font-[650] text-[1rem]">
+      <p className="z-[0] mt-24 text-[#545454] font-[650] text-[1.2rem]">
+        {name}
+      </p>
+      <p className="z-[0] text-[#808080] font-[650] text-[1rem]">
         {shortDescription}
       </p>
-      <p className="mb-4 text-[1rem] font-semibold text-[#303030]">
+      <p className="z-[0] mb-4 text-[1rem] font-semibold text-[#303030]">
         <span className="text-red-600">$</span> {price}
       </p>
       <div className="bottom-[-2rem] absolute rounded-[50%] bg-red-500 p-3">

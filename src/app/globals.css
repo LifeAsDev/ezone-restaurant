@@ -27,3 +27,10 @@ body {
 .fruit-section {
   grid-template-columns: repeat(auto-fill, 12rem);
 }
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}

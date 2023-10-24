@@ -6,7 +6,7 @@ main {
   color: #303030;
 }
 body {
-  background-color: rgb(243, 252, 243);
+  background-color: rgb(240, 249, 240);
 }
 .gradient-transparent {
   background-image: linear-gradient(
@@ -33,4 +33,24 @@ body {
 }
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
+}
+.category-selected {
+  background: #e80013;
+}
+.category-selected p {
+  font-weight: 600;
+  color: white;
+}
+.category-selected svg {
+  stroke: #303030;
+  fill: #303030;
+}
+
+.category-selected div {
+  background: hsla(0, 0%, 100%, 0.8);
+}
+.menu-box {
+  display: grid;
+  grid-template-columns: repeat(5, 12rem);
+  justify-content: center;
 }

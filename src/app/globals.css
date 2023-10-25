@@ -54,3 +54,15 @@ body {
   grid-template-columns: repeat(5, 12rem);
   justify-content: center;
 }
+.profile-list {
+  visibility: hidden;
+}
+.profile-box:hover .profile-list {
+  visibility: visible;
+}
+.show-cart-list {
+  transition: right 0.2s, opacity 0.5s;
+  right: 0;
+  opacity: 1;
+  visibility: visible;
+}

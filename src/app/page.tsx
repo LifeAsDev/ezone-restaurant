@@ -34,9 +34,90 @@ export default function Home() {
       container.scrollLeft += dir; // Ajusta el valor según tu preferencia
     }
   };
+  const logged = true;
+  function toggleInvisibleClass() {
+    const cartList = document.getElementById("cart-list");
+
+    if (cartList) {
+      cartList.classList.toggle("show-cart-list");
+    }
+  }
   return (
     <main>
-      <nav className="bg-white px-[6rem] py-[1.5rem] pt-[1.2rem] w-full  flex flex-row justify-between">
+      <div
+        id="cart-list"
+        className="opacity-0 invisible bg-white fixed h-[100vh] w-[25%] z-[3] right-[-20%] p-6"
+      >
+        <div className="flex justify-between">
+          <svg
+            onClick={toggleInvisibleClass}
+            className="cursor-pointer"
+            width="30px"
+            height="30px"
+            viewBox="0 0 24 24"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+              <g
+                id="Arrow"
+                transform="translate(-480.000000, 0.000000)"
+                fillRule="nonzero"
+              >
+                <g id="back_2_line" transform="translate(480.000000, 0.000000)">
+                  <path
+                    d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z"
+                    id="MingCute"
+                    fillRule="nonzero"
+                  ></path>
+                  <path
+                    d="M6.04599,11.6767 C7.35323,9.47493 9.75524,8 12.5,8 C16.6421,8 20,11.3579 20,15.5 C20,16.0523 20.4477,16.5 21,16.5 C21.5523,16.5 22,16.0523 22,15.5 C22,10.2533 17.7467,6 12.5,6 C9.31864,6 6.50386,7.56337 4.78,9.96279 L4.24303,6.91751 C4.14713,6.37361 3.62847,6.01044 3.08458,6.10635 C2.54068,6.20225 2.17751,6.72091 2.27342,7.2648 L3.31531,13.1736 C3.36136,13.4348 3.50928,13.667 3.72654,13.8192 C4.0104,14.0179 4.38776,14.0542 4.70227,13.9445 L10.3826,12.9429 C10.9265,12.847 11.2897,12.3284 11.1938,11.7845 C11.0979,11.2406 10.5792,10.8774 10.0353,10.9733 L6.04599,11.6767 Z"
+                    id="路径"
+                    fill="#09244B"
+                  ></path>
+                </g>
+              </g>
+            </g>
+          </svg>
+          <div className="flex justify-between items-center gap-2 cursor-pointer">
+            <p className="font-[500]">Cart</p>
+            <svg
+              className="fill-red-500"
+              xmlns="http://www.w3.org/2000/svg"
+              height="1.25rem"
+              viewBox="0 0 448 512"
+            >
+              <path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z" />
+            </svg>
+          </div>
+          <div className="flex justify-between items-center gap-2 cursor-pointer">
+            <p className="font-[500]">clear</p>
+            <svg
+              width="20px"
+              height="20px"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17 9a1 1 0 01-1-1c0-.551-.448-1-1-1H5.414l1.293 1.293a.999.999 0 11-1.414 1.414l-3-3a.999.999 0 010-1.414l3-3a.997.997 0 011.414 0 .999.999 0 010 1.414L5.414 5H15c1.654 0 3 1.346 3 3a1 1 0 01-1 1zM3 11a1 1 0 011 1c0 .551.448 1 1 1h9.586l-1.293-1.293a.999.999 0 111.414-1.414l3 3a.999.999 0 010 1.414l-3 3a.999.999 0 11-1.414-1.414L14.586 15H5c-1.654 0-3-1.346-3-3a1 1 0 011-1z"
+                className="fill-red-500"
+              />
+            </svg>
+          </div>
+        </div>
+        <div className="mt-40 flex flex-col justify-center items-center">
+          <Image
+            src={"/img/empty-cart.png"}
+            width={500}
+            height={500}
+            alt="empty cart"
+          />
+          <p className="font-[600] text-[#5e5e5e] text-[1.2rem]">
+            Cart is empty
+          </p>
+        </div>
+      </div>
+      <nav className="white-transparent backdrop-blur px-[6rem] py-[1.5rem] pt-[1.2rem] w-full fixed flex flex-row justify-between z-[2]">
         <div className="gap-2 font-[700] text-[1.4rem] flex flex-row h-[2.2rem] cursor-pointer">
           <Image
             className="object-contain w-auto"
@@ -55,14 +136,76 @@ export default function Home() {
           <li className="cursor-pointer">Contact us</li>
         </ul>
         <ul className="flex flex-row mt-[.5rem] gap-[2rem]">
-          <ShopBagSvg />
-          <div className="select-none cursor-pointer px-[1rem] text-center py-[.25rem] gap-[.5rem] font-[500] flex flex-row border-[1px] rounded-md  ">
-            <LoginSvg />
-            Login
-          </div>
+          {logged ? (
+            <>
+              <div
+                className="cursor-pointer relative mt-[.3rem]"
+                onClick={toggleInvisibleClass}
+              >
+                <ShopBagSvg />
+                <div className="absolute top-[-.7rem] right-[-.9rem] bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
+                  0
+                </div>
+              </div>
+              <div className="profile-box flex flex-row items-center cursor-pointer">
+                <div className="p-1 pb-0 bg-[#3bc416] w-10 h-10 rounded-[50%] relative">
+                  <svg
+                    className="w-full h-full fill-[#d9ffd9]"
+                    version="1.1"
+                    id="_x32_"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <g>
+                      <path
+                        d="M256,265.308c73.252,0,132.644-59.391,132.644-132.654C388.644,59.412,329.252,0,256,0
+		c-73.262,0-132.643,59.412-132.643,132.654C123.357,205.917,182.738,265.308,256,265.308z"
+                      />
+                      <path
+                        d="M425.874,393.104c-5.922-35.474-36-84.509-57.552-107.465c-5.829-6.212-15.948-3.628-19.504-1.427
+		c-27.04,16.672-58.782,26.399-92.819,26.399c-34.036,0-65.778-9.727-92.818-26.399c-3.555-2.201-13.675-4.785-19.505,1.427
+		c-21.55,22.956-51.628,71.991-57.551,107.465C71.573,480.444,164.877,512,256,512C347.123,512,440.427,480.444,425.874,393.104z"
+                      />
+                    </g>
+                  </svg>
+                  <div className="profile-list flex flex-col absolute w-[20rem] rounded-md bg-[#e0f5ff] right-[-5rem] font-[480] shadow-xl">
+                    <div className="px-10 py-[.4rem] hover:bg-white rounded-t-md">
+                      <p>Angelocraft551@gmail.com</p>
+                    </div>
+                    <div className="px-10 py-[.4rem] hover:bg-white">
+                      <p>Profile</p>
+                    </div>
+                    <div className="px-10 py-[.4rem] hover:bg-white rounded-b-md">
+                      <p>Logout</p>
+                    </div>
+                  </div>
+                </div>
+                <svg
+                  width="20px"
+                  height="20px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7 10L12 15L17 10"
+                    stroke="#000000"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            </>
+          ) : (
+            <div className="select-none cursor-pointer px-[1rem] text-center py-[.25rem] gap-[.5rem] font-[500] flex flex-row border-[1px] rounded-md  ">
+              <LoginSvg />
+              Login
+            </div>
+          )}
         </ul>
       </nav>
-      <section className="mt-[2rem] px-[2rem]">
+      <section className="pt-[6.5rem] px-[2rem]">
         <div className="flex flex-row gap-[0.65rem]">
           <div className="w-[50%] flex flex-col gap-3 justify-center">
             <div className="w-[11.30rem] gap-[.5rem] h-[2.5rem] bg-[#cdfac0] rounded-full flex items-center px-[.80rem]">
@@ -412,7 +555,7 @@ export default function Home() {
         <hr className="border-t-2" />
         <div className="mt-12 flex flex justify-between">
           <p className="text-[.9rem] text-[#808080] font-[500] flex justify-center">
-            © 2023 éZone™. All Rights Reserved.
+            © 2023 éZoné™. All Rights Reserved.
           </p>
           <div className="flex gap-8">
             <Link
@@ -486,19 +629,14 @@ function CategoryButton({
 
 function ShopBagSvg() {
   return (
-    <div className="relative mt-[.3rem]">
-      <svg
-        className="fill-[#4a4a4a]"
-        xmlns="http://www.w3.org/2000/svg"
-        height="1.75rem"
-        viewBox="0 0 448 512"
-      >
-        <path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z" />
-      </svg>
-      <div className="absolute top-[-.7rem] right-[-.9rem] bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
-        0
-      </div>
-    </div>
+    <svg
+      className="fill-[#4a4a4a]"
+      xmlns="http://www.w3.org/2000/svg"
+      height="1.5rem"
+      viewBox="0 0 448 512"
+    >
+      <path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z" />
+    </svg>
   );
 }
 function LoginSvg() {

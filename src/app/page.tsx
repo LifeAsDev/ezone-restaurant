@@ -7,6 +7,7 @@ import Link from "next/link";
 export default function Home() {
   const [categorySelected, setCategorySelected] = useState("Menu");
   const [reorderedProducts, setReorderedProducts] = useState<any[]>([]);
+  const [cartItems, setCartItems] = useState(["fruit"]);
   useEffect(() => {
     // Función para desordenar el array
     function desordenarArray<T>(array: T[]): T[] {
@@ -46,9 +47,9 @@ export default function Home() {
     <main>
       <div
         id="cart-list"
-        className="opacity-0 invisible bg-white fixed h-[100vh] w-[25%] z-[3] right-[-20%] p-6"
+        className="opacity-0 invisible bg-white fixed h-[100vh] w-[25%] z-[3] right-[-20%] p-6 px-0"
       >
-        <div className="flex justify-between">
+        <div className="flex justify-between mx-6 mb-6">
           <svg
             onClick={toggleInvisibleClass}
             className="cursor-pointer"
@@ -105,17 +106,121 @@ export default function Home() {
             </svg>
           </div>
         </div>
-        <div className="mt-40 flex flex-col justify-center items-center">
-          <Image
-            src={"/img/empty-cart.png"}
-            width={500}
-            height={500}
-            alt="empty cart"
-          />
-          <p className="font-[600] text-[#5e5e5e] text-[1.2rem]">
-            Cart is empty
-          </p>
-        </div>
+        {cartItems.length > 0 ? (
+          <div className="bg-[#292c28] h-full rounded-t-[2rem] flex flex-col justify-between">
+            <div className="px-4 py-8 flex w-full">
+              <div className="bg-[#323631] rounded-lg px-2 py-4 h-[5.5rem] w-full flex items-center justify-between">
+                <Image
+                  src={"/img/f2.png"}
+                  width={60}
+                  height={60}
+                  alt="empty cart"
+                />
+                <div className="ml-2 flex flex-col font-[600] mr-2">
+                  <p className="text-white">Pineapple</p>
+                  <p className="text-[#c4c4c4] text-[.9rem]">
+                    <span className="text-red-600">$</span> 0.00
+                  </p>
+                </div>
+                <div className="flex flex-row gap-[.2rem] items-center">
+                  <svg
+                    className="cursor-pointer"
+                    width="25px"
+                    height="25px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15 12H9"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <p className="bg-[#292c28] text-[.875rem] text-white w-5 h-5 font-[600] text-center">
+                    1
+                  </p>
+                  <svg
+                    className="cursor-pointer"
+                    width="25px"
+                    height="25px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </div>
+                <div className="cursor-pointer text-sm text-gray-50 w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center p-1">
+                  <svg
+                    className="text-center fill-white flex justify-center items-center pr-[2px]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 32 32"
+                  >
+                    <path d="M 15 4 C 14.476563 4 13.941406 4.183594 13.5625 4.5625 C 13.183594 4.941406 13 5.476563 13 6 L 13 7 L 7 7 L 7 9 L 8 9 L 8 25 C 8 26.644531 9.355469 28 11 28 L 23 28 C 24.644531 28 26 26.644531 26 25 L 26 9 L 27 9 L 27 7 L 21 7 L 21 6 C 21 5.476563 20.816406 4.941406 20.4375 4.5625 C 20.058594 4.183594 19.523438 4 19 4 Z M 15 6 L 19 6 L 19 7 L 15 7 Z M 10 9 L 24 9 L 24 25 C 24 25.554688 23.554688 26 23 26 L 11 26 C 10.445313 26 10 25.554688 10 25 Z M 12 12 L 12 23 L 14 23 L 14 12 Z M 16 12 L 16 23 L 18 23 L 18 12 Z M 20 12 L 20 23 L 22 23 L 22 12 Z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[#323631] h-[50%] px-6 rounded-t-[2rem] flex flex-col py-8 gap-5">
+              <div className="flex flex-row justify-between text-[1.1rem] font-[550] text-[#adadad]">
+                <p>Sub Total</p>
+                <div>-</div>
+                <p>
+                  <span className="text-red-600">$</span> 0
+                </p>
+              </div>
+              <div className="flex flex-row justify-between text-[1.1rem] font-[550] text-[#adadad]">
+                <p>Delivery</p>
+                <div>-</div>
+                <p>
+                  <span className="text-red-600">$</span> 0
+                </p>
+              </div>
+              <hr className="border-[#808080]"></hr>
+              <div className="flex flex-row justify-between text-[1.25rem] font-[550] text-white">
+                <p>TOTAL</p>
+                <div>-</div>
+                <p>
+                  <span className="text-red-600">$</span> 0
+                </p>
+              </div>
+              <button className="w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg font-[600]">
+                Checkout $0.00
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-40 flex flex-col justify-center items-center">
+            <Image
+              src={"/img/empty-cart.png"}
+              width={500}
+              height={500}
+              alt="empty cart"
+            />
+            <p className="font-[600] text-[#5e5e5e] text-[1.2rem]">
+              Cart is empty
+            </p>
+          </div>
+        )}
       </div>
       <nav className="white-transparent backdrop-blur px-[6rem] py-[1.5rem] pt-[1.2rem] w-full fixed flex flex-row justify-between z-[2]">
         <div className="gap-2 font-[700] text-[1.4rem] flex flex-row h-[2.2rem] cursor-pointer">
@@ -144,7 +249,7 @@ export default function Home() {
               >
                 <ShopBagSvg />
                 <div className="absolute top-[-.7rem] right-[-.9rem] bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
-                  0
+                  {cartItems.length}
                 </div>
               </div>
               <div className="profile-box flex flex-row items-center cursor-pointer">
@@ -705,7 +810,7 @@ function ItemsToBuy({ imgSrc, name, description, price }: itemsToBuy) {
       <p className="z-[0] mb-4 text-[1rem] font-semibold text-[#303030]">
         <span className="text-red-600">$</span> {price}
       </p>
-      <div className="bottom-[-2rem] absolute rounded-[50%] bg-red-500 p-3">
+      <div className="cursor-pointer bottom-[-2rem] absolute rounded-[50%] bg-red-500 p-3">
         <Image
           className="w-6"
           src={"/img/addToCart.png"}

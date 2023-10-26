@@ -65,4 +65,17 @@ body {
   right: 0;
   opacity: 1;
   visibility: visible;
+  animation-name: bounce;
+  animation-duration: 0.5s;
+}
+@keyframes bounce {
+  0% {
+    right: -25%;
+  }
+  60% {
+    right: 1rem;
+  }
+  80% {
+    right: 0;
+  }
 }

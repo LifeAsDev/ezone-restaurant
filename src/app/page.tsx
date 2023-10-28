@@ -7,7 +7,51 @@ import Link from "next/link";
 export default function Home() {
   const [categorySelected, setCategorySelected] = useState("Menu");
   const [reorderedProducts, setReorderedProducts] = useState<any[]>([]);
-  const [cartItems, setCartItems] = useState(["fruit"]);
+  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [checkPay, setCheckingPay] = useState(false);
+  const addToCart = (item: string) => {
+    if (logged) {
+      const itemIndex = cartItems.findIndex(
+        (cartItem) => cartItem.name === item
+      );
+
+      if (itemIndex !== -1) {
+        const updatedCart = [...cartItems];
+        updatedCart[itemIndex].quantity += 1;
+        setCartItems(updatedCart);
+      } else {
+        const itemSelect = products.filter(
+          (productItem) => productItem.name === item
+        );
+        const { imgSrc, name, price } = itemSelect[0];
+
+        const updatedCart = [
+          ...cartItems,
+          { imgSrc, name, price, quantity: 1 },
+        ];
+        setCartItems(updatedCart);
+      }
+    }
+  };
+
+  const removeFromCart = (item: string) => {
+    const updatedCart = cartItems.filter((cartItem) => cartItem.name !== item);
+    setCartItems(updatedCart);
+  };
+
+  const updateQuantity = (item: string, operation: string) => {
+    const updatedCart = cartItems.map((cartItemOld) => {
+      if (cartItemOld.name === item) {
+        if (operation === "plus") {
+          return { ...cartItemOld, quantity: cartItemOld.quantity + 1 };
+        } else if (cartItemOld.quantity > 1) {
+          return { ...cartItemOld, quantity: cartItemOld.quantity - 1 };
+        }
+      }
+      return cartItemOld;
+    });
+    setCartItems(updatedCart);
+  };
   useEffect(() => {
     // Función para desordenar el array
     function desordenarArray<T>(array: T[]): T[] {
@@ -37,189 +81,243 @@ export default function Home() {
   };
   const logged = true;
   function toggleInvisibleClass() {
+    setCheckingPay(false);
     const cartList = document.getElementById("cart-list");
 
     if (cartList) {
       cartList.classList.toggle("show-cart-list");
     }
   }
+  const totalPrice: number =
+    Math.round(
+      (cartItems.reduce(
+        (accumulator, currentValue) =>
+          accumulator + currentValue.price * currentValue.quantity,
+        0
+      ) +
+        Number.EPSILON) *
+        100
+    ) / 100;
   return (
     <main>
       <div
         id="cart-list"
         className="opacity-0 invisible bg-white fixed h-[100vh] w-[25%] z-[3] right-[-20%] p-6 px-0"
       >
-        <div className="flex justify-between mx-6 mb-6">
-          <svg
-            onClick={toggleInvisibleClass}
-            className="cursor-pointer"
-            width="30px"
-            height="30px"
-            viewBox="0 0 24 24"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-              <g
-                id="Arrow"
-                transform="translate(-480.000000, 0.000000)"
-                fillRule="nonzero"
+        {checkPay ? (
+          <div></div>
+        ) : (
+          <>
+            <div className="flex justify-between mx-6 mb-6">
+              <svg
+                onClick={toggleInvisibleClass}
+                className="cursor-pointer"
+                width="30px"
+                height="30px"
+                viewBox="0 0 24 24"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <g id="back_2_line" transform="translate(480.000000, 0.000000)">
-                  <path
-                    d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z"
-                    id="MingCute"
+                <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                  <g
+                    id="Arrow"
+                    transform="translate(-480.000000, 0.000000)"
                     fillRule="nonzero"
-                  ></path>
-                  <path
-                    d="M6.04599,11.6767 C7.35323,9.47493 9.75524,8 12.5,8 C16.6421,8 20,11.3579 20,15.5 C20,16.0523 20.4477,16.5 21,16.5 C21.5523,16.5 22,16.0523 22,15.5 C22,10.2533 17.7467,6 12.5,6 C9.31864,6 6.50386,7.56337 4.78,9.96279 L4.24303,6.91751 C4.14713,6.37361 3.62847,6.01044 3.08458,6.10635 C2.54068,6.20225 2.17751,6.72091 2.27342,7.2648 L3.31531,13.1736 C3.36136,13.4348 3.50928,13.667 3.72654,13.8192 C4.0104,14.0179 4.38776,14.0542 4.70227,13.9445 L10.3826,12.9429 C10.9265,12.847 11.2897,12.3284 11.1938,11.7845 C11.0979,11.2406 10.5792,10.8774 10.0353,10.9733 L6.04599,11.6767 Z"
-                    id="路径"
-                    fill="#09244B"
-                  ></path>
+                  >
+                    <g
+                      id="back_2_line"
+                      transform="translate(480.000000, 0.000000)"
+                    >
+                      <path
+                        d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z"
+                        id="MingCute"
+                        fillRule="nonzero"
+                      ></path>
+                      <path
+                        d="M6.04599,11.6767 C7.35323,9.47493 9.75524,8 12.5,8 C16.6421,8 20,11.3579 20,15.5 C20,16.0523 20.4477,16.5 21,16.5 C21.5523,16.5 22,16.0523 22,15.5 C22,10.2533 17.7467,6 12.5,6 C9.31864,6 6.50386,7.56337 4.78,9.96279 L4.24303,6.91751 C4.14713,6.37361 3.62847,6.01044 3.08458,6.10635 C2.54068,6.20225 2.17751,6.72091 2.27342,7.2648 L3.31531,13.1736 C3.36136,13.4348 3.50928,13.667 3.72654,13.8192 C4.0104,14.0179 4.38776,14.0542 4.70227,13.9445 L10.3826,12.9429 C10.9265,12.847 11.2897,12.3284 11.1938,11.7845 C11.0979,11.2406 10.5792,10.8774 10.0353,10.9733 L6.04599,11.6767 Z"
+                        id="路径"
+                        fill="#09244B"
+                      ></path>
+                    </g>
+                  </g>
                 </g>
-              </g>
-            </g>
-          </svg>
-          <div className="flex justify-between items-center gap-2 cursor-pointer">
-            <p className="font-[500]">Cart</p>
-            <svg
-              className="fill-red-500"
-              xmlns="http://www.w3.org/2000/svg"
-              height="1.25rem"
-              viewBox="0 0 448 512"
-            >
-              <path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z" />
-            </svg>
-          </div>
-          <div className="flex justify-between items-center gap-2 cursor-pointer">
-            <p className="font-[500]">clear</p>
-            <svg
-              width="20px"
-              height="20px"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M17 9a1 1 0 01-1-1c0-.551-.448-1-1-1H5.414l1.293 1.293a.999.999 0 11-1.414 1.414l-3-3a.999.999 0 010-1.414l3-3a.997.997 0 011.414 0 .999.999 0 010 1.414L5.414 5H15c1.654 0 3 1.346 3 3a1 1 0 01-1 1zM3 11a1 1 0 011 1c0 .551.448 1 1 1h9.586l-1.293-1.293a.999.999 0 111.414-1.414l3 3a.999.999 0 010 1.414l-3 3a.999.999 0 11-1.414-1.414L14.586 15H5c-1.654 0-3-1.346-3-3a1 1 0 011-1z"
-                className="fill-red-500"
-              />
-            </svg>
-          </div>
-        </div>
-        {cartItems.length > 0 ? (
-          <div className="bg-[#292c28] h-full rounded-t-[2rem] flex flex-col justify-between">
-            <div className="px-4 py-8 flex w-full">
-              <div className="bg-[#323631] rounded-lg px-2 py-4 h-[5.5rem] w-full flex items-center justify-between">
+              </svg>
+              <div className="flex justify-between items-center gap-2 cursor-pointer">
+                <p className="font-[500]">Cart</p>
+                <svg
+                  className="fill-red-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="1.25rem"
+                  viewBox="0 0 448 512"
+                >
+                  <path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z" />
+                </svg>
+              </div>
+              <div
+                onClick={() => setCartItems([])}
+                className="select-none flex justify-between items-center gap-2 cursor-pointer"
+              >
+                <p className="font-[500]">clear</p>
+                <svg
+                  width="20px"
+                  height="20px"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M17 9a1 1 0 01-1-1c0-.551-.448-1-1-1H5.414l1.293 1.293a.999.999 0 11-1.414 1.414l-3-3a.999.999 0 010-1.414l3-3a.997.997 0 011.414 0 .999.999 0 010 1.414L5.414 5H15c1.654 0 3 1.346 3 3a1 1 0 01-1 1zM3 11a1 1 0 011 1c0 .551.448 1 1 1h9.586l-1.293-1.293a.999.999 0 111.414-1.414l3 3a.999.999 0 010 1.414l-3 3a.999.999 0 11-1.414-1.414L14.586 15H5c-1.654 0-3-1.346-3-3a1 1 0 011-1z"
+                    className="fill-red-500"
+                  />
+                </svg>
+              </div>
+            </div>
+            {cartItems.length > 0 ? (
+              <div className="bg-[#292c28] h-full rounded-t-[2rem] flex flex-col justify-between">
+                <div className="px-3 py-5 w-full h-[19rem]">
+                  <div className="w-full flex flex-col gap-3 overflow-scroll overflow-x-hidden scrollbar-hidden scroll-smooth h-full">
+                    {cartItems.map((item) => {
+                      return (
+                        <div
+                          key={item.name}
+                          className="bg-[#323631] rounded-lg px-2 py-4 min-h-[5.5rem] w-full flex items-center justify-between"
+                        >
+                          <div className="flex flex-row gap-1">
+                            <div className="min-w-[3.5rem] min-h-[3.5rem] flex justify-center items-center">
+                              <Image
+                                className="h-auto"
+                                src={item.imgSrc}
+                                width={48}
+                                height={48}
+                                alt="empty cart"
+                              />
+                            </div>
+                            <div className="flex flex-col font-[600] justify-center">
+                              <p className="text-white flex flex-wrap text-[.95rem]">
+                                {item.name}
+                              </p>
+                              <p className="text-[#c4c4c4] text-[.9rem]">
+                                <span className="text-red-600">$</span>{" "}
+                                {item.price}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="select-none flex flex-row gap-2">
+                            <div className="flex flex-row gap-[.2rem] items-center">
+                              <svg
+                                onClick={() =>
+                                  updateQuantity(item.name, "minus")
+                                }
+                                className="cursor-pointer"
+                                width="25px"
+                                height="25px"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M15 12H9"
+                                  stroke="white"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                />
+                                <path
+                                  d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8"
+                                  stroke="white"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                />
+                              </svg>
+                              <p className="bg-[#292c28] text-[.875rem] text-white w-5 h-5 font-[600] text-center">
+                                {item.quantity}
+                              </p>
+                              <svg
+                                onClick={() =>
+                                  updateQuantity(item.name, "plus")
+                                }
+                                className="cursor-pointer"
+                                width="25px"
+                                height="25px"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                                  stroke="white"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                />
+                                <path
+                                  d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8"
+                                  stroke="white"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                />
+                              </svg>
+                            </div>
+                            <div
+                              onClick={() => removeFromCart(item.name)}
+                              className="cursor-pointer text-sm text-gray-50 w-7 h-7 rounded-lg bg-red-600 flex items-center justify-center p-[.1rem]"
+                            >
+                              <svg
+                                className="text-center fill-white flex justify-center items-center pr-[2px]"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 32 32"
+                              >
+                                <path d="M 15 4 C 14.476563 4 13.941406 4.183594 13.5625 4.5625 C 13.183594 4.941406 13 5.476563 13 6 L 13 7 L 7 7 L 7 9 L 8 9 L 8 25 C 8 26.644531 9.355469 28 11 28 L 23 28 C 24.644531 28 26 26.644531 26 25 L 26 9 L 27 9 L 27 7 L 21 7 L 21 6 C 21 5.476563 20.816406 4.941406 20.4375 4.5625 C 20.058594 4.183594 19.523438 4 19 4 Z M 15 6 L 19 6 L 19 7 L 15 7 Z M 10 9 L 24 9 L 24 25 C 24 25.554688 23.554688 26 23 26 L 11 26 C 10.445313 26 10 25.554688 10 25 Z M 12 12 L 12 23 L 14 23 L 14 12 Z M 16 12 L 16 23 L 18 23 L 18 12 Z M 20 12 L 20 23 L 22 23 L 22 12 Z"></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="bg-[#323631] h-[50%] px-6 rounded-t-[2rem] flex flex-col py-8 gap-5">
+                  <div className="flex flex-row justify-between text-[1.1rem] font-[550] text-[#adadad]">
+                    <p className="w-24">Sub Total</p>
+                    <div>-</div>
+                    <p className="w-24 text-right">
+                      <span className="text-red-600">$</span> {totalPrice}
+                    </p>
+                  </div>
+                  <div className="flex flex-row justify-between text-[1.1rem] font-[550] text-[#adadad]">
+                    <p className="w-24">Delivery</p>
+                    <div>-</div>
+                    <p className="w-24 text-right">
+                      <span className="text-red-600">$</span> 0
+                    </p>
+                  </div>
+                  <hr className="border-[#808080]"></hr>
+                  <div className="flex flex-row justify-between text-[1.25rem] font-[550] text-white">
+                    <p className="w-24">TOTAL</p>
+                    <div>-</div>
+                    <p className="w-24 text-right">
+                      <span className="text-red-600">$</span> {totalPrice}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setCheckingPay(true)}
+                    className="w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg font-[600]"
+                  >
+                    Checkout ${totalPrice}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="mt-40 flex flex-col justify-center items-center">
                 <Image
-                  src={"/img/f2.png"}
-                  width={60}
-                  height={60}
+                  src={"/img/empty-cart.png"}
+                  width={500}
+                  height={500}
                   alt="empty cart"
                 />
-                <div className="ml-2 flex flex-col font-[600] mr-2">
-                  <p className="text-white">Pineapple</p>
-                  <p className="text-[#c4c4c4] text-[.9rem]">
-                    <span className="text-red-600">$</span> 0.00
-                  </p>
-                </div>
-                <div className="flex flex-row gap-[.2rem] items-center">
-                  <svg
-                    className="cursor-pointer"
-                    width="25px"
-                    height="25px"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M15 12H9"
-                      stroke="white"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8"
-                      stroke="white"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  <p className="bg-[#292c28] text-[.875rem] text-white w-5 h-5 font-[600] text-center">
-                    1
-                  </p>
-                  <svg
-                    className="cursor-pointer"
-                    width="25px"
-                    height="25px"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
-                      stroke="white"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8"
-                      stroke="white"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-                <div className="cursor-pointer text-sm text-gray-50 w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center p-1">
-                  <svg
-                    className="text-center fill-white flex justify-center items-center pr-[2px]"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 32 32"
-                  >
-                    <path d="M 15 4 C 14.476563 4 13.941406 4.183594 13.5625 4.5625 C 13.183594 4.941406 13 5.476563 13 6 L 13 7 L 7 7 L 7 9 L 8 9 L 8 25 C 8 26.644531 9.355469 28 11 28 L 23 28 C 24.644531 28 26 26.644531 26 25 L 26 9 L 27 9 L 27 7 L 21 7 L 21 6 C 21 5.476563 20.816406 4.941406 20.4375 4.5625 C 20.058594 4.183594 19.523438 4 19 4 Z M 15 6 L 19 6 L 19 7 L 15 7 Z M 10 9 L 24 9 L 24 25 C 24 25.554688 23.554688 26 23 26 L 11 26 C 10.445313 26 10 25.554688 10 25 Z M 12 12 L 12 23 L 14 23 L 14 12 Z M 16 12 L 16 23 L 18 23 L 18 12 Z M 20 12 L 20 23 L 22 23 L 22 12 Z"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div className="bg-[#323631] h-[50%] px-6 rounded-t-[2rem] flex flex-col py-8 gap-5">
-              <div className="flex flex-row justify-between text-[1.1rem] font-[550] text-[#adadad]">
-                <p>Sub Total</p>
-                <div>-</div>
-                <p>
-                  <span className="text-red-600">$</span> 0
+                <p className="font-[600] text-[#5e5e5e] text-[1.2rem]">
+                  Cart is empty
                 </p>
               </div>
-              <div className="flex flex-row justify-between text-[1.1rem] font-[550] text-[#adadad]">
-                <p>Delivery</p>
-                <div>-</div>
-                <p>
-                  <span className="text-red-600">$</span> 0
-                </p>
-              </div>
-              <hr className="border-[#808080]"></hr>
-              <div className="flex flex-row justify-between text-[1.25rem] font-[550] text-white">
-                <p>TOTAL</p>
-                <div>-</div>
-                <p>
-                  <span className="text-red-600">$</span> 0
-                </p>
-              </div>
-              <button className="w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg font-[600]">
-                Checkout $0.00
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="mt-40 flex flex-col justify-center items-center">
-            <Image
-              src={"/img/empty-cart.png"}
-              width={500}
-              height={500}
-              alt="empty cart"
-            />
-            <p className="font-[600] text-[#5e5e5e] text-[1.2rem]">
-              Cart is empty
-            </p>
-          </div>
+            )}
+          </>
         )}
       </div>
       <nav className="white-transparent backdrop-blur px-[6rem] py-[1.5rem] pt-[1.2rem] w-full fixed flex flex-row justify-between z-[2]">
@@ -340,6 +438,7 @@ export default function Home() {
           </div>
           <div className="w-[50%] relative">
             <Image
+              priority
               className="rounded-[20px]  z-[-1]  ml-auto lg:h-[550px] h-[420px] w-full lg:w-auto right-0"
               src={"/img/hero.jpg"}
               height={736}
@@ -351,24 +450,28 @@ export default function Home() {
               {products ? (
                 <>
                   <ItemsToBuy
+                    addToCart={addToCart}
                     name={products[9].name}
                     imgSrc={products[9].imgSrc}
                     description={products[9].description}
                     price={products[9].price}
                   />
                   <ItemsToBuy
+                    addToCart={addToCart}
                     name={products[1].name}
                     imgSrc={products[1].imgSrc}
                     description={products[1].description}
                     price={products[1].price}
                   />
                   <ItemsToBuy
+                    addToCart={addToCart}
                     name={products[29].name}
                     imgSrc={products[29].imgSrc}
                     description={products[29].description}
                     price={products[29].price}
                   />
                   <ItemsToBuy
+                    addToCart={addToCart}
                     name={products[25].name}
                     imgSrc={products[25].imgSrc}
                     description={products[25].description}
@@ -419,6 +522,7 @@ export default function Home() {
                   }) => {
                     return (
                       <ItemsToBuy
+                        addToCart={addToCart}
                         key={item.name}
                         imgSrc={item.imgSrc}
                         name={item.name}
@@ -617,6 +721,7 @@ export default function Home() {
                 }) => {
                   return (
                     <ItemsToBuy
+                      addToCart={addToCart}
                       key={item.name}
                       imgSrc={item.imgSrc}
                       name={item.name}
@@ -789,8 +894,15 @@ interface itemsToBuy {
   name: string;
   description: string;
   price: number;
+  addToCart: (item: string) => void;
 }
-function ItemsToBuy({ imgSrc, name, description, price }: itemsToBuy) {
+function ItemsToBuy({
+  imgSrc,
+  name,
+  description,
+  price,
+  addToCart,
+}: itemsToBuy) {
   return (
     <div className="relative gap-2 min-w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
       <div className=" absolute backdrop-blur-[3px] drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
@@ -810,7 +922,10 @@ function ItemsToBuy({ imgSrc, name, description, price }: itemsToBuy) {
       <p className="z-[0] mb-4 text-[1rem] font-semibold text-[#303030]">
         <span className="text-red-600">$</span> {price}
       </p>
-      <div className="cursor-pointer bottom-[-2rem] absolute rounded-[50%] bg-red-500 p-3">
+      <div
+        onClick={() => addToCart(name)}
+        className="select-none cursor-pointer bottom-[-2rem] absolute rounded-[50%] bg-red-500 p-3"
+      >
         <Image
           className="w-6"
           src={"/img/addToCart.png"}

@@ -106,3 +106,31 @@ body {
     transform: rotate(360deg);
   }
 }
+.register-button {
+  background-color: rgba(217, 255, 217, 0.3);
+}
+.loader {
+  border: 8px solid transparent; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}

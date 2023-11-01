@@ -3,6 +3,8 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
 import { OnboardingProvider } from "./context/MyContext";
+import Footer from "./components/Footer";
+import { NextAuthProvider } from "./Providers";
 const inter = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,12 +19,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <OnboardingProvider>
-          <Nav />
-          {children}
-        </OnboardingProvider>
-      </body>
+      <NextAuthProvider>
+        <body className={inter.className}>
+          <OnboardingProvider>
+            <Nav />
+            {children}
+            <Footer />
+          </OnboardingProvider>
+        </body>
+      </NextAuthProvider>
     </html>
   );
 }

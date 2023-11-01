@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { useRef, RefObject, useState, useEffect } from "react";
 import { useOnboardingContext } from "../context/MyContext";
+import Link from "next/link";
+
 export default function Nav() {
   const { cartFunctions, cartItems } = useOnboardingContext();
 
@@ -562,7 +564,7 @@ export default function Nav() {
           </>
         )}
       </div>
-      <nav className="white-transparent backdrop-blur px-[6rem] py-[1.5rem] pt-[1.2rem] w-full fixed flex flex-row justify-between z-[2]">
+      <nav className="top-0 white-transparent backdrop-blur px-[6rem] py-[1.5rem] pt-[1.2rem] w-full fixed flex flex-row justify-between z-[2]">
         <div className="gap-2 font-[700] text-[1.4rem] flex flex-row h-[2.2rem] cursor-pointer">
           <Image
             className="object-contain w-auto"
@@ -576,12 +578,14 @@ export default function Nav() {
           </p>
         </div>
         <ul className="flex flex-row gap-[3rem] text-[.9rem] text-[#808080] font-[500] text-center items-center flex pt-[0.5rem] select-none	">
-          <li className="cursor-pointer">Home</li>
+          <Link href="/">
+            <li className="cursor-pointer">Home</li>
+          </Link>
           <li className="cursor-pointer">Menu</li>
           <li className="cursor-pointer">Contact us</li>
         </ul>
         <ul className="flex flex-row mt-[.5rem] gap-[2rem]">
-          {true ? (
+          {false ? (
             <>
               <div
                 className="cursor-pointer relative mt-[.3rem]"
@@ -643,9 +647,19 @@ export default function Nav() {
               </div>
             </>
           ) : (
-            <div className="select-none cursor-pointer px-[1rem] text-center py-[.25rem] gap-[.5rem] font-[500] flex flex-row border-[1px] rounded-md  ">
-              <LoginSvg />
-              Login
+            <div className="flex  gap-2">
+              <Link href="/sign-in">
+                <div className="select-none cursor-pointer px-[1rem] text-center py-[.25rem] gap-[.5rem] font-[500] flex flex-row border-[1px] rounded-md  ">
+                  <LoginSvg />
+                  Sign In
+                </div>
+              </Link>
+              <Link href="/sign-up">
+                <div className="register-button border-[#46CC21] select-none cursor-pointer px-[1rem] text-center py-[.25rem] gap-[.5rem] font-[500] flex flex-row border-[1px] rounded-md  ">
+                  <RegisterSvg />
+                  Sign Up
+                </div>
+              </Link>
             </div>
           )}
         </ul>
@@ -675,6 +689,20 @@ function LoginSvg() {
       viewBox="0 0 512 512"
     >
       <path d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z" />
+    </svg>
+  );
+}
+function RegisterSvg() {
+  return (
+    <svg
+      className="flex justify-center items-center h-full"
+      width="1.1rem"
+      height="1.1rem"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M18 9H4V8h14zm-5 3H4v1h9zm8-8v9h-1V5H2v13h9v1H1V4zm2.07 11.637l-.707-.707-5.863 5.863-2.863-2.863-.707.707 3.57 3.57z" />
+      <path fill="none" d="M0 0h24v24H0z" />
     </svg>
   );
 }

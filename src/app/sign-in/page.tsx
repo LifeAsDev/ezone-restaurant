@@ -15,7 +15,6 @@ export default function Home() {
     }
   }, [router, session]);
 
-  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -25,8 +24,13 @@ export default function Home() {
     setLoading(true);
     e.preventDefault();
     let newErrors: string[] = [];
-    if (name === "") {
-      newErrors.push("name required");
+
+    if (email === "") {
+      newErrors.push("email required");
+    }
+
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      newErrors.push("email invalid");
     }
 
     if (password === "") {
@@ -39,7 +43,6 @@ export default function Home() {
     }
 
     const res: any = await signIn("credentials", {
-      name,
       password,
       redirect: false,
       callbackUrl: `${window.location.origin}`,

@@ -1,10 +1,15 @@
 "use client";
+import { useRouter } from "next/navigation";
+
+import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { useRef, RefObject, useState, useEffect } from "react";
 import products from "@/app/utils/MenuData";
 import { useOnboardingContext } from "./context/MyContext";
 
 export default function Home() {
+  const { data: session, status } = useSession();
+
   const { cartFunctions, cartItems, reorderedProducts } =
     useOnboardingContext();
 
@@ -64,6 +69,7 @@ export default function Home() {
               {products ? (
                 <>
                   <ItemsToBuy
+                    status={status}
                     addToCart={() =>
                       cartFunctions("add", {
                         item: products[9].name,
@@ -75,6 +81,7 @@ export default function Home() {
                     price={products[9].price}
                   />
                   <ItemsToBuy
+                    status={status}
                     addToCart={() =>
                       cartFunctions("add", {
                         item: products[1].name,
@@ -86,6 +93,7 @@ export default function Home() {
                     price={products[1].price}
                   />
                   <ItemsToBuy
+                    status={status}
                     addToCart={() =>
                       cartFunctions("add", {
                         item: products[29].name,
@@ -97,6 +105,7 @@ export default function Home() {
                     price={products[29].price}
                   />
                   <ItemsToBuy
+                    status={status}
                     addToCart={() =>
                       cartFunctions("add", {
                         item: products[25].name,
@@ -152,6 +161,7 @@ export default function Home() {
                   }) => {
                     return (
                       <ItemsToBuy
+                        status={status}
                         addToCart={() =>
                           cartFunctions("add", {
                             item: item.name,
@@ -355,6 +365,7 @@ export default function Home() {
                 }) => {
                   return (
                     <ItemsToBuy
+                      status={status}
                       addToCart={() =>
                         cartFunctions("add", {
                           item: item.name,
@@ -477,6 +488,7 @@ interface itemsToBuy {
   description: string;
   price: number;
   addToCart: (item: string) => void;
+  status: string;
 }
 function ItemsToBuy({
   imgSrc,
@@ -484,7 +496,10 @@ function ItemsToBuy({
   description,
   price,
   addToCart,
+  status,
 }: itemsToBuy) {
+  const router = useRouter();
+
   return (
     <div className="relative gap-2 min-w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
       <div className=" absolute backdrop-blur-[3px] drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
@@ -505,7 +520,13 @@ function ItemsToBuy({
         <span className="text-red-600">$</span> {price}
       </p>
       <div
-        onClick={() => addToCart(name)}
+        onClick={() => {
+          if (status === "authenticated") {
+            addToCart(name);
+          } else {
+            router.push("/sign-in");
+          }
+        }}
         className="select-none cursor-pointer bottom-[-2rem] absolute rounded-[50%] bg-red-500 p-3"
       >
         <Image

@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 import GoogleButton from "../components/GoogleButton";
 
 export default function Home() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
@@ -19,9 +18,7 @@ export default function Home() {
     setLoading(true);
     e.preventDefault();
     let newErrors: string[] = [];
-    if (name === "") {
-      newErrors.push("name required");
-    }
+
     if (email === "") {
       newErrors.push("email required");
     }
@@ -31,6 +28,9 @@ export default function Home() {
     }
     if (password === "") {
       newErrors.push("pass required");
+    }
+    if (password.length < 6) {
+      newErrors.push("Least 6 characters");
     }
 
     setErrors((arr) => [...newErrors]);
@@ -96,13 +96,20 @@ export default function Home() {
             setErrors([]);
           }}
           className={`pb-3 outline-0  border-b-2  ${
-            errors.includes("pass required") ? "border-red-500" : ""
+            errors.includes("pass required") ||
+            errors.includes("Least 6 characters")
+              ? "border-red-500"
+              : ""
           }`}
           type="password"
           placeholder="Password"
         ></input>
         <p className="min-h-[2rem] text-red-500 font-medium text-end">
-          {errors.includes("pass required") ? "Field required" : null}
+          {errors.includes("pass required")
+            ? "Field required"
+            : errors.includes("Least 6 characters")
+            ? "Least 6 characters"
+            : null}
         </p>
         <button
           disabled={loading}

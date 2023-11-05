@@ -8,6 +8,9 @@ import mongoose from "mongoose";
 export async function POST(req: Request) {
   const { email, cart } = await req.json();
   await connectMongoDB();
+  if (email === undefined) {
+    return NextResponse.json({ error: "Email undefined" }, { status: 400 });
+  }
   const data = await User.findOneAndUpdate(
     {
       email: email.toUpperCase(),

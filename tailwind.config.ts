@@ -28,7 +28,7 @@ const config: Config = {
         silver: "#ecebff",
         "bubble-gum": "#ff77e9",
         bermuda: "#78dcca",
-        green: "rgba(111,181,84,255)",
+        greenn: "rgba(111,181,84,255)",
       },
     },
   },

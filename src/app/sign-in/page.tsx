@@ -108,7 +108,7 @@ export default function Home() {
         </p>
         <button
           disabled={loading}
-          className={`flex justify-center items-center shadow-e box-border font-[600] mt-4 h-[52px] text-white rounded-[50px] bg-green p-[.5rem] ${
+          className={`flex justify-center items-center shadow-e box-border font-[600] mt-4 h-[52px] text-white rounded-[50px] bg-greenn p-[.5rem] ${
             loading ? "saturate-50" : ""
           }`}
         >
@@ -116,7 +116,7 @@ export default function Home() {
         </button>
         <Link className="mt-8" href={"/sign-up"}>
           Don&apos;t have an account?
-          <span className="text-green"> Sign up</span>
+          <span className="text-greenn"> Sign up</span>
         </Link>
       </form>
     </main>

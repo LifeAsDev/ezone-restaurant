@@ -16,6 +16,64 @@ export const OnboardingProvider = ({
   const { data: session, status } = useSession();
 
   useEffect(() => {
+    if (session?.user?.email !== undefined) {
+      const fetchData = async () => {
+        try {
+          const email = session?.user?.email;
+
+          const res = await fetch("api/updateCart", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+              email,
+              cart: cartItems,
+            }),
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data.message === "Users get" && data.cart !== null) {
+              setCartItems(data.cart);
+            }
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+      fetchData();
+    }
+  }, [cartItems]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (status === "authenticated") {
+        try {
+          const email = session?.user?.email;
+
+          const res = await fetch("api/check", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+              email,
+            }),
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data.message === "Users get" && data.cart !== null) {
+              setCartItems(data.cart);
+            }
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [status]);
+
+  useEffect(() => {
     // Función para desordenar el array
     function desordenarArray<T>(array: T[]): T[] {
       const arrayDesordenado = [...array];

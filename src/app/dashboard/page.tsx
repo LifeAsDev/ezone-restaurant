@@ -135,16 +135,16 @@ export default function Home() {
   }, [status, session]);
 
   if (status === "loading") {
-    return <p> </p>;
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center p-4 gap-4"></main>
+    );
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 gap-4">
-      <h2 disable={status} className="text-[2rem]	font-extrabold	">
-        DASHBOARD
-      </h2>
+    <main className="mt-[3rem] flex min-h-screen flex-col items-center justify-center p-4 gap-4">
+      <h2 className="text-[2rem] font-extrabold">DASHBOARD</h2>
       {session ? (
-        <div className="border w-full  md:w-[500px]  flex border-gray-300 items-center rounded-lg p-4 pb-6 flex-col justify-center gap-4  mt-4 mg:mt-10">
+        <div className="bg-white border w-full  md:w-[500px] flex border-gray-300 items-center rounded-lg p-4 pb-6 flex-col justify-center gap-4 mg:mt-10">
           <div className="w-full pb-3 flex flex-row	gap-4 items-center 	border-b-[1px] border-gray-300 w-full">
             <UserIcon />
             <input
@@ -213,7 +213,7 @@ export default function Home() {
               <button
                 type="submit"
                 disabled={imgURL === ""}
-                className={`w-[70%] outline-none flex justify-center items-center shadow-e box-border mt-3 h-[48px] text-white rounded-[50px] bg-green p-[.5rem] ${
+                className={`w-[70%] outline-none flex justify-center items-center shadow-e font-[600] box-border mt-3 h-[48px] text-white rounded-[50px] bg-greenn p-[.5rem] ${
                   imgURL === "" || loadingImg < 99
                     ? "saturate-[.3] cursor-not-allowed	  "
                     : ""
@@ -224,7 +224,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => signOut()}
-                className={`w-[30%] outline-none flex justify-center items-center shadow-red box-border mt-3 h-[48px] text-white rounded-[50px] bg-red-500 p-[.5rem]`}
+                className={`w-[30%] outline-none font-[600] flex justify-center items-center shadow-red box-border mt-3 h-[48px] text-white rounded-[50px] bg-red-500 p-[.5rem]`}
               >
                 SIGN OUT
               </button>

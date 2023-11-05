@@ -111,14 +111,14 @@ export default function Home() {
         </p>
         <button
           disabled={loading}
-          className={`flex justify-center items-center font-[600] shadow-e box-border h-[52px] mt-4 text-white rounded-[50px] bg-green p-[.5rem] ${
+          className={`flex justify-center items-center font-[600] shadow-e box-border h-[52px] mt-4 text-white rounded-[50px] bg-greenn p-[.5rem] ${
             loading ? "saturate-50" : ""
           }`}
         >
           {!loading ? "SIGN UP" : <div className="loader"></div>}
         </button>
         <Link className="mt-8" href={"/sign-in"}>
-          Already have an account? <span className="text-green"> Sign In</span>
+          Already have an account? <span className="text-greenn"> Sign In</span>
         </Link>
       </form>
     </main>

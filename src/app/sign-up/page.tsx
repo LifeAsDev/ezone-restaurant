@@ -41,13 +41,11 @@ export default function Home() {
       const res = await fetch("api/register", {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ email, password }),
       });
       if (res.ok) {
         const data = await res.json();
-        data.message !== "user created"
-          ? setErrors([data.message])
-          : router.push("/");
+        data.message !== "user created" ? setErrors([data.message]) : null;
 
         setLoading(false);
       }

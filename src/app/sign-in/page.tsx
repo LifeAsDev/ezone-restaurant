@@ -3,17 +3,10 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import GoogleButton from "@/app/components/GoogleButton";
 export default function Home() {
   const router = useRouter();
-
-  const { data: session } = useSession();
-  useEffect(() => {
-    if (session) {
-      router.push("/dashboard");
-    }
-  }, [router, session]);
 
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
@@ -44,13 +37,14 @@ export default function Home() {
 
     const res: any = await signIn("credentials", {
       password,
+      email,
       redirect: false,
       callbackUrl: `${window.location.origin}`,
     });
 
     if (!res.error) {
       setLoading(false);
-      router.push("/dashboard");
+      router.push("/");
     } else {
       setErrors(["wrong credentials"]);
       setLoading(false);
@@ -73,7 +67,7 @@ export default function Home() {
           className={`pb-3 outline-0  border-b-2  ${
             errors.includes("email required") ||
             errors.includes("email invalid") ||
-            errors.includes("Email already in use")
+            errors.includes("wrong credentials")
               ? "border-red-500"
               : ""
           }`}
@@ -85,8 +79,8 @@ export default function Home() {
             ? "Field required"
             : errors.includes("email invalid")
             ? "Email invalid"
-            : errors.includes("Email already in use")
-            ? "Email already in use"
+            : errors.includes("wrong credentials")
+            ? "Incorrect Email"
             : null}
         </p>
         <input

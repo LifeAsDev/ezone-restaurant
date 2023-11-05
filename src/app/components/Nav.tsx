@@ -3,9 +3,10 @@ import Image from "next/image";
 import { useRef, RefObject, useState, useEffect } from "react";
 import { useOnboardingContext } from "../context/MyContext";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 export default function Nav() {
-  const { cartFunctions, cartItems } = useOnboardingContext();
+  const { cartFunctions, cartItems, status } = useOnboardingContext();
 
   const [checkPay, setCheckingPay] = useState(false);
   const [selectedOption, setSelectedOption] = useState("pix");
@@ -585,7 +586,7 @@ export default function Nav() {
           <li className="cursor-pointer">Contact us</li>
         </ul>
         <ul className="flex flex-row mt-[.5rem] gap-[2rem]">
-          {false ? (
+          {status === "authenticated" ? (
             <>
               <div
                 className="cursor-pointer relative mt-[.3rem]"
@@ -624,7 +625,10 @@ export default function Nav() {
                     <div className="px-10 py-[.4rem] hover:bg-white">
                       <p>Profile</p>
                     </div>
-                    <div className="px-10 py-[.4rem] hover:bg-white rounded-b-md">
+                    <div
+                      onClick={() => signOut()}
+                      className="px-10 py-[.4rem] hover:bg-white rounded-b-md"
+                    >
                       <p>Logout</p>
                     </div>
                   </div>

@@ -5,7 +5,7 @@ export async function middleware(req: any) {
   const auth = req.nextUrl.clone();
   auth.pathname = "/sign-in";
   const afterAuth = req.nextUrl.clone();
-  afterAuth.pathname = "/dashboard";
+  afterAuth.pathname = "/";
 
   if (req.nextUrl.pathname === "/dashboard") {
     const session = await getToken({

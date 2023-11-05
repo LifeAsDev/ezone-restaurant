@@ -1,5 +1,6 @@
 "use client";
 import products from "@/app/utils/MenuData";
+import { useSession } from "next-auth/react";
 
 import React, { useEffect, useState } from "react";
 
@@ -12,6 +13,8 @@ export const OnboardingProvider = ({
 }) => {
   const [reorderedProducts, setReorderedProducts] = useState<any[]>([]);
   const [cartItems, setCartItems] = useState<any[]>([]);
+  const { data: session, status } = useSession();
+
   useEffect(() => {
     // Función para desordenar el array
     function desordenarArray<T>(array: T[]): T[] {
@@ -85,7 +88,7 @@ export const OnboardingProvider = ({
 
   return (
     <OnboardingContext.Provider
-      value={{ cartFunctions, reorderedProducts, cartItems }}
+      value={{ cartFunctions, reorderedProducts, cartItems, status, session }}
     >
       {children}
     </OnboardingContext.Provider>

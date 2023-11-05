@@ -8,9 +8,7 @@ import products from "@/app/utils/MenuData";
 import { useOnboardingContext } from "./context/MyContext";
 
 export default function Home() {
-  const { data: session, status } = useSession();
-
-  const { cartFunctions, cartItems, reorderedProducts } =
+  const { cartFunctions, cartItems, reorderedProducts, status } =
     useOnboardingContext();
 
   const [categorySelected, setCategorySelected] = useState("Menu");

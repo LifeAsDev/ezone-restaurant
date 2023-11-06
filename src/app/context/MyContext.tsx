@@ -44,6 +44,41 @@ export const OnboardingProvider = ({
     }
   }, [cartItems]);
 
+  const [phone, setPhone] = useState("");
+  const [imgURL, setimgURL] = useState("");
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      const getUserData = async () => {
+        try {
+          const email = session?.user?.email;
+
+          const res = await fetch("api/check", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+              email,
+            }),
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data.message === "Users get") {
+              const imageUrl = data.imageUrl || session?.user?.image || "";
+              setimgURL(imageUrl);
+              setPhone(data.phone);
+              setName(data.name);
+            }
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+      getUserData();
+    }
+  }, [status]);
+
   useEffect(() => {
     const fetchData = async () => {
       if (status === "authenticated") {
@@ -143,10 +178,22 @@ export const OnboardingProvider = ({
     });
     setCartItems(updatedCart);
   };
+  console.log(imgURL);
 
   return (
     <OnboardingContext.Provider
-      value={{ cartFunctions, reorderedProducts, cartItems, status, session }}
+      value={{
+        cartFunctions,
+        reorderedProducts,
+        cartItems,
+        status,
+        session,
+        phone,
+        imgURL,
+        setPhone,
+        setimgURL,
+        name,
+      }}
     >
       {children}
     </OnboardingContext.Provider>

@@ -8,8 +8,13 @@ export async function POST(req: Request) {
 
   await connectMongoDB();
   const data = await User.findOne({ email: email.toUpperCase() });
-  let imageUrl, phone, cart;
+  let imageUrl, phone, cart, name;
 
+  if (data.name !== undefined) {
+    name = data.name;
+  } else {
+    name = null;
+  }
   if (data.imageUrl !== undefined) {
     imageUrl = data.imageUrl;
   } else {
@@ -31,6 +36,7 @@ export async function POST(req: Request) {
       imageUrl,
       cart,
       phone,
+      name,
     },
     { status: 201 }
   );

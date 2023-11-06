@@ -8,17 +8,16 @@ import PhoneIcon from "../components/phoneSVG";
 import UploadIcon from "../components/uploadSVG";
 import DeleteIcon from "../components/deleteSVG";
 import Image from "next/image";
+import { useOnboardingContext } from "../context/MyContext";
 
 export default function Home() {
-  const [phone, setPhone] = useState("");
-  const [imgURL, setimgURL] = useState("");
   const [loadingImg, setLoadingImg] = useState(100);
-  const [selectedImage, setSelectedImage] = useState();
+  const { imgURL, phone, setimgURL, setPhone, status, session } =
+    useOnboardingContext();
 
   // This function will be triggered when the file field change
   const imageChange = (e: any) => {
     if (e.target.files && e.target.files.length > 0) {
-      setSelectedImage(e.target.files[0]);
       setimgURL(URL.createObjectURL(e.target.files[0]));
     }
   };
@@ -32,7 +31,6 @@ export default function Home() {
       fileInput.dispatchEvent(new Event("change"));
     }
     setimgURL("");
-    setSelectedImage(undefined);
   };
 
   const numberHandler = (e: any) => {
@@ -54,9 +52,6 @@ export default function Home() {
       if (res.ok) {
         const data = await res.json();
         console.log("Updated on mongoDB Boss");
-        data.message === "Users update"
-          ? setSelectedImage(data.imageUrl)
-          : null;
 
         console.log(data.message);
       }
@@ -100,40 +95,6 @@ export default function Home() {
     );
   };
 
-  const { data: session, status } = useSession();
-
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const email = session?.user?.email;
-        console.log(email);
-
-        const res = await fetch("api/check", {
-          method: "POST",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify({
-            email,
-          }),
-        });
-
-        if (res.ok) {
-          const data = await res.json();
-          if (data.message === "Users get") {
-            const imageUrl = data.imageUrl || session?.user?.image || "";
-            setimgURL(imageUrl);
-            setPhone(data.phone);
-          }
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    if (status !== "loading") {
-      getUserData();
-    }
-  }, [status, session]);
-
   if (status === "loading") {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center p-4 gap-4"></main>
@@ -141,7 +102,7 @@ export default function Home() {
   }
 
   return (
-    <main className="mt-[3rem] flex min-h-screen flex-col items-center justify-center p-4 gap-4">
+    <main className="mt-[5rem] flex  flex-col items-center justify-center p-4 gap-4">
       <h2 className="text-[2rem] font-extrabold">DASHBOARD</h2>
       {session ? (
         <div className="bg-white border w-full  md:w-[500px] flex border-gray-300 items-center rounded-lg p-4 pb-6 flex-col justify-center gap-4 mg:mt-10">

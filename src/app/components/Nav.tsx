@@ -6,7 +6,8 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 
 export default function Nav() {
-  const { cartFunctions, cartItems, status } = useOnboardingContext();
+  const { cartFunctions, cartItems, status, name, imgURL } =
+    useOnboardingContext();
 
   const [checkPay, setCheckingPay] = useState(false);
   const [selectedOption, setSelectedOption] = useState("pix");
@@ -45,7 +46,6 @@ export default function Nav() {
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
   };
-
   return (
     <>
       <div
@@ -596,7 +596,21 @@ export default function Nav() {
                 </div>
               </div>
               <div className="profile-box flex flex-row items-center cursor-pointer">
-                <div className="p-1 pb-0 bg-[#3bc416] w-10 h-10 rounded-[50%] relative">
+                <div
+                  className={`p-1 pb-0 bg-[#3bc416] w-10 h-10 rounded-[50%] relative overflow-hidden ${
+                    imgURL ? "p-0" : ""
+                  }`}
+                >
+                  {imgURL ? (
+                    <Image
+                      className="w-full min-h-[40px] absolute bg-white"
+                      src={imgURL}
+                      width={56}
+                      height={56}
+                      alt="Picture of the author"
+                    />
+                  ) : null}
+
                   <svg
                     className="w-full h-full fill-[#d9ffd9]"
                     version="1.1"
@@ -618,7 +632,7 @@ export default function Nav() {
                   </svg>
                   <div className="profile-list flex flex-col absolute w-[20rem] rounded-md bg-[#e0f5ff] right-[-5rem] font-[480] shadow-xl">
                     <div className="px-10 py-[.4rem] cursor-text rounded-t-md">
-                      <p>Angelocraft551@gmail.com</p>
+                      <p>{name}</p>
                     </div>
                     <Link
                       href={"/dashboard"}

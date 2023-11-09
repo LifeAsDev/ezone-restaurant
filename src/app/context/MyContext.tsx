@@ -46,6 +46,8 @@ export const OnboardingProvider = ({
 
   const [phone, setPhone] = useState("");
   const [imgURL, setimgURL] = useState("");
+  const [userImgURL, setUserImgURL] = useState("");
+
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -67,8 +69,12 @@ export const OnboardingProvider = ({
             if (data.message === "Users get") {
               const imageUrl = data.imageUrl || session?.user?.image || "";
               setimgURL(imageUrl);
+              setUserImgURL(imageUrl);
               setPhone(data.phone);
               setName(data.name);
+              if (data.cart !== null) {
+                setCartItems(data.cart);
+              }
             }
           }
         } catch (error) {
@@ -77,35 +83,6 @@ export const OnboardingProvider = ({
       };
       getUserData();
     }
-  }, [status]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (status === "authenticated") {
-        try {
-          const email = session?.user?.email;
-
-          const res = await fetch("api/check", {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify({
-              email,
-            }),
-          });
-
-          if (res.ok) {
-            const data = await res.json();
-            if (data.message === "Users get" && data.cart !== null) {
-              setCartItems(data.cart);
-            }
-          }
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      }
-    };
-
-    fetchData();
   }, [status]);
 
   useEffect(() => {
@@ -178,7 +155,6 @@ export const OnboardingProvider = ({
     });
     setCartItems(updatedCart);
   };
-  console.log(imgURL);
 
   return (
     <OnboardingContext.Provider
@@ -192,7 +168,10 @@ export const OnboardingProvider = ({
         imgURL,
         setPhone,
         setimgURL,
+        setUserImgURL,
+        userImgURL,
         name,
+        setName,
       }}
     >
       {children}

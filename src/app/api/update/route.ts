@@ -6,17 +6,17 @@ import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 
 export async function POST(req: Request) {
-  const { phone, imageUrl, email } = await req.json();
+  const { phone, imageUrl, email, name } = await req.json();
   await connectMongoDB();
   const data = await User.findOneAndUpdate(
     {
       email: email.toUpperCase(),
     },
-    { phone, imageUrl },
+    { name, phone, imageUrl },
     { new: true }
   );
   return NextResponse.json(
-    { message: "Users update", imageUrl },
+    { message: "Users update", imageUrl, name },
     { status: 201 }
   );
 }

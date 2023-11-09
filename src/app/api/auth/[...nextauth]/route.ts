@@ -17,9 +17,7 @@ const handler = NextAuth({
         console.log("userCreated");
 
         const userExist1 = await User.findOne({
-          email: {
-            $regex: new RegExp(email || "", "i"),
-          },
+          email: email?.toUpperCase(),
         }).select("email name");
 
         if (userExist1) {
@@ -30,8 +28,8 @@ const handler = NextAuth({
           return false;
         } else {
           User.create({
-            name: " ",
-            email,
+            name: email?.toUpperCase(),
+            email: email?.toUpperCase(),
             password: " ",
           });
           return true;
@@ -91,17 +89,7 @@ const handler = NextAuth({
   pages: {
     signIn: "/sign-in",
   },
-  cookies: {
-    pkceCodeVerifier: {
-      name: "next-auth.pkce.code_verifier",
-      options: {
-        httpOnly: true,
-        sameSite: "none",
-        path: "/sign-in",
-        secure: true,
-      },
-    },
-  },
+
   session: {
     strategy: "jwt",
   },

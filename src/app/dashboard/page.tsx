@@ -12,8 +12,24 @@ import { useOnboardingContext } from "../context/MyContext";
 
 export default function Home() {
   const [loadingImg, setLoadingImg] = useState(100);
-  const { imgURL, phone, setimgURL, setPhone, status, session } =
-    useOnboardingContext();
+
+  const {
+    imgURL,
+    phone,
+    setimgURL,
+    setUserImgURL,
+    setPhone,
+    status,
+    session,
+    name,
+    setName,
+  } = useOnboardingContext();
+
+  const [nameEdit, setNameEdit] = useState("");
+
+  useEffect(() => {
+    setNameEdit(name);
+  }, [name]);
 
   // This function will be triggered when the file field change
   const imageChange = (e: any) => {
@@ -45,6 +61,7 @@ export default function Home() {
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
           email: session?.user?.email,
+          name: nameEdit,
           phone,
           imageUrl: url,
         }),
@@ -52,7 +69,7 @@ export default function Home() {
       if (res.ok) {
         const data = await res.json();
         console.log("Updated on mongoDB Boss");
-
+        setName(data.name);
         console.log(data.message);
       }
       setLoadingImg(100);
@@ -86,6 +103,8 @@ export default function Home() {
             console.log("uploaded to firebase boss");
 
             setimgURL(url);
+            setUserImgURL(url);
+
             updateOnMongoDB(url);
 
             console.log(url);
@@ -109,10 +128,11 @@ export default function Home() {
           <div className="w-full pb-3 flex flex-row	gap-4 items-center 	border-b-[1px] border-gray-300 w-full">
             <UserIcon />
             <input
+              placeholder="Name"
               className="bg-transparent outline-none grow"
               type="text"
-              disabled
-              value={session?.user?.name ?? ""}
+              onChange={(e) => setNameEdit(e.target.value)}
+              value={nameEdit}
             ></input>
           </div>
           <div className="w-full pb-3 flex flex-row	gap-4 items-center 	border-b-[1px] border-gray-300 w-full">

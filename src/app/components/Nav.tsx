@@ -67,7 +67,7 @@ export default function Nav() {
       </div>
       <div
         id="cart-list"
-        className="opacity-0 invisible bg-white fixed h-[100vh] w-[25%] z-[3] right-[-20%] p-6 px-0"
+        className="opacity-0 invisible bg-white fixed top-0 h-[100vh] w-[25%] z-[3] right-[-20%] p-6 px-0"
       >
         {checkPay ? (
           <>
@@ -577,10 +577,12 @@ export default function Nav() {
           </p>
         </div>
         <ul className="flex flex-row gap-[3rem] text-[.9rem] text-[#808080] font-[500] text-center items-center flex pt-[0.5rem] select-none	">
-          <Link href="/">
-            <li className="cursor-pointer">Home</li>
-          </Link>
-          <li className="cursor-pointer">Menu</li>
+          <li className="cursor-pointer">
+            <Link href="/">Home </Link>
+          </li>
+          <li className="cursor-pointer">
+            <Link href="/menu">Menu </Link>
+          </li>
           <li className="cursor-pointer">Contact us</li>
         </ul>
         <ul className="flex flex-row mt-[.5rem] gap-[2rem]">

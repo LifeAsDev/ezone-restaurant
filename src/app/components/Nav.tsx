@@ -29,6 +29,8 @@ export default function Nav() {
         cartList.classList.add(classToggle);
       } else if (method === "remove") {
         cartList.classList.remove(classToggle);
+      } else if (method === "toggle") {
+        cartList.classList.toggle(classToggle);
       }
     }
   }
@@ -563,6 +565,106 @@ export default function Nav() {
           </>
         )}
       </div>
+      <div
+        id="contact-us"
+        className="w-full py-6 h-screen md:w-[350px] bg-white md:backdrop-blur-sm flex flex-col z-[101] drop-shadow-xl fixed top-0 left-0"
+      >
+        <div className="flex justify-between mx-6 mb-6">
+          <div className="flex items-center justify-center gap-x-2 px-2">
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              strokeWidth="0"
+              viewBox="0 0 24 24"
+              className="text-xl cursor-pointer text-orange-600"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path fill="none" d="M0 0h24v24H0V0z"></path>
+              <path d="M4 4h16v12H5.17L4 17.17V4m0-2c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H4zm2 10h12v2H6v-2zm0-3h12v2H6V9zm0-3h12v2H6V6z"></path>
+            </svg>
+            <span className="font-[500]">CONTACT US</span>
+          </div>
+          <div>
+            <svg
+              onClick={() => toggleClass("contact-us", "none", "toggle")}
+              className="cursor-pointer scale-x-[-1]"
+              width="30px"
+              height="30px"
+              viewBox="0 0 24 24"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g stroke="none" strokeWidth="-1" fill="none" fillRule="evenodd">
+                <g
+                  id="Arrow"
+                  transform="translate(-480.000000, 0.000000)"
+                  fillRule="nonzero"
+                >
+                  <g
+                    id="back_2_line"
+                    transform="translate(480.000000, 0.000000)"
+                  >
+                    <path
+                      d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z"
+                      id="MingCute"
+                      fillRule="nonzero"
+                    ></path>
+                    <path
+                      d="M6.04599,11.6767 C7.35323,9.47493 9.75524,8 12.5,8 C16.6421,8 20,11.3579 20,15.5 C20,16.0523 20.4477,16.5 21,16.5 C21.5523,16.5 22,16.0523 22,15.5 C22,10.2533 17.7467,6 12.5,6 C9.31864,6 6.50386,7.56337 4.78,9.96279 L4.24303,6.91751 C4.14713,6.37361 3.62847,6.01044 3.08458,6.10635 C2.54068,6.20225 2.17751,6.72091 2.27342,7.2648 L3.31531,13.1736 C3.36136,13.4348 3.50928,13.667 3.72654,13.8192 C4.0104,14.0179 4.38776,14.0542 4.70227,13.9445 L10.3826,12.9429 C10.9265,12.847 11.2897,12.3284 11.1938,11.7845 C11.0979,11.2406 10.5792,10.8774 10.0353,10.9733 L6.04599,11.6767 Z"
+                      id="路径"
+                      fill="#09244B"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div className="h-full w-full flex items-center flex-col justify-center px-4 bg-primary">
+          <div className="mb-6 w-full flex itemx-center justify-center gap-y-3 flex-col">
+            <div className="mb-6">
+              <input
+                type="text"
+                className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
+                placeholder="Your Name"
+              />
+            </div>
+            <div className="mb-6">
+              <input
+                type="text"
+                className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
+                placeholder="Email ID"
+              />
+            </div>
+            <div className="mb-6">
+              <input
+                type="text"
+                className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
+                placeholder="Subject"
+              />
+            </div>
+            <div className="mb-6">
+              <textarea
+                className="form-control block w-full min-h-[25vh] px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
+                placeholder="Message"
+              ></textarea>
+            </div>
+            <button className="w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg font-[600]">
+              Send Message
+            </button>
+          </div>
+          <p className="mb-2 cursor-pointer text-sm text-gray-500 dark:text-gray-400">
+            <a
+              href="mailto:angelocraft551@gmail.com"
+              className="hover:underline"
+            >
+              angelocraft551@gmail.com
+            </a>
+          </p>
+        </div>
+      </div>
       <nav className="top-0 white-transparent backdrop-blur px-[6rem] py-[1.5rem] pt-[1.2rem] w-full fixed flex flex-row justify-between z-[2]">
         <div className="gap-2 font-[700] text-[1.4rem] flex flex-row h-[2.2rem] cursor-pointer">
           <Image
@@ -583,7 +685,12 @@ export default function Nav() {
           <li className="cursor-pointer">
             <Link href="/menu">Menu </Link>
           </li>
-          <li className="cursor-pointer">Contact us</li>
+          <li
+            onClick={() => toggleClass("contact-us", "none", "toggle")}
+            className="cursor-pointer"
+          >
+            Contact us
+          </li>
         </ul>
         <ul className="flex flex-row mt-[.5rem] gap-[2rem]">
           {status === "authenticated" ? (

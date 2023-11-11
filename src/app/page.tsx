@@ -50,7 +50,7 @@ export default function Home() {
               repudiandae accusamus aut exercitationem nisi non doloribus!
               Temporibus officia architecto reiciendis blanditiis.
             </p>
-            <div className="select-none cursor-pointer mt-[1rem] bg-[#46cc21] block p-[.8rem] py-[.6rem] rounded-md w-[7.25rem]">
+            <div className="select-none cursor-pointer mt-[1rem] bg-[#46cc21] block p-[.8rem] py-[.6rem] rounded-md w-[7.25rem] hover:scale-[1.075] transition-all	">
               Order Now
             </div>
           </div>
@@ -471,7 +471,7 @@ function ArrowSvg({ right }: ArrowSvg) {
   const direction = right ? "" : "rotate-180";
   return (
     <div
-      className={`bg-[#3bc416] rounded-lg w-[2.5rem] h-[2.5rem] p-[.5rem] ${direction}`}
+      className={` hover:scale-[1.075] transition-all bg-[#3bc416] rounded-lg w-[2.5rem] h-[2.5rem] p-[.5rem] ${direction}`}
     >
       <svg
         width="100%"
@@ -510,10 +510,10 @@ function ItemsToBuy({
   const router = useRouter();
 
   return (
-    <div className="relative gap-2 min-w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
+    <div className="relative gap-2 min-w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl ">
       <div className=" absolute backdrop-blur-[3px] drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
       <Image
-        className="absolute block h-[8rem] w-auto bottom-[6.5rem] "
+        className="absolute block h-[8rem] w-auto bottom-[6.5rem] hover:scale-[1.1] transition-all	"
         src={imgSrc}
         height={130}
         width={130}
@@ -536,7 +536,7 @@ function ItemsToBuy({
             router.push("/sign-in");
           }
         }}
-        className="select-none cursor-pointer bottom-[-2rem] absolute rounded-[50%] bg-red-500 p-3"
+        className="select-none cursor-pointer bottom-[-2rem] absolute rounded-[50%] bg-red-500 p-3 hover:scale-[1.1] transition-all	"
       >
         <Image
           className="w-6"

@@ -29,6 +29,7 @@ export default function Nav() {
               href="https://github.com/LifeAsDev"
             >
               <svg
+                className="hover:fill-[#616060]"
                 stroke="#808080"
                 fill="#808080"
                 strokeWidth="0"

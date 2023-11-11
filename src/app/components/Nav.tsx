@@ -290,7 +290,7 @@ export default function Nav() {
                       cartFunctions("clear");
                     }, 1000);
                   }}
-                  className="w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg font-[600]
+                  className="active:scale-[1.05] transition-all w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg font-[600]
           flex flex-row items-center justify-center gap-2"
                 >
                   {loadingPay ? (
@@ -445,7 +445,7 @@ export default function Nav() {
                                     item: item.name,
                                   })
                                 }
-                                className="cursor-pointer"
+                                className="cursor-pointer active:scale-[1.1] "
                                 width="25px"
                                 height="25px"
                                 viewBox="0 0 24 24"
@@ -475,7 +475,7 @@ export default function Nav() {
                                     item: item.name,
                                   })
                                 }
-                                className="cursor-pointer"
+                                className="cursor-pointer  active:scale-[1.1] "
                                 width="25px"
                                 height="25px"
                                 viewBox="0 0 24 24"
@@ -502,10 +502,10 @@ export default function Nav() {
                                   item: item.name,
                                 })
                               }
-                              className="cursor-pointer text-sm text-gray-50 w-7 h-7 rounded-lg bg-red-600 flex items-center justify-center p-[.1rem]"
+                              className=" active:scale-[1.1]  cursor-pointer text-sm text-gray-50 w-7 h-7 rounded-lg bg-red-600 flex items-center justify-center p-[.1rem]"
                             >
                               <svg
-                                className="text-center fill-white flex justify-center items-center pr-[2px]"
+                                className="text-center fill-white flex justify-center items-center pr-[2px] "
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 32 32"
                               >
@@ -543,7 +543,7 @@ export default function Nav() {
                   </div>
                   <button
                     onClick={() => setCheckingPay(true)}
-                    className="w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg font-[600]"
+                    className="active:scale-[1.05] transition-all  w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg font-[600]"
                   >
                     Checkout ${totalPrice}
                   </button>
@@ -567,7 +567,7 @@ export default function Nav() {
       </div>
       <div
         id="contact-us"
-        className="w-full py-6 h-screen md:w-[350px] bg-white md:backdrop-blur-sm flex flex-col z-[101] drop-shadow-xl fixed top-0 left-0"
+        className="none w-full py-6 h-screen md:w-[350px] bg-white md:backdrop-blur-sm flex flex-col z-[101] drop-shadow-xl fixed top-0 left-0"
       >
         <div className="flex justify-between mx-6 mb-6">
           <div className="flex items-center justify-center gap-x-2 px-2">
@@ -651,7 +651,7 @@ export default function Nav() {
                 placeholder="Message"
               ></textarea>
             </div>
-            <button className="w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg font-[600]">
+            <button className="active:scale-[1.05] transition-all  w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg font-[600]">
               Send Message
             </button>
           </div>
@@ -666,28 +666,31 @@ export default function Nav() {
         </div>
       </div>
       <nav className="top-0 white-transparent backdrop-blur px-[6rem] py-[1.5rem] pt-[1.2rem] w-full fixed flex flex-row justify-between z-[2]">
-        <div className="gap-2 font-[700] text-[1.4rem] flex flex-row h-[2.2rem] cursor-pointer">
-          <Image
-            className="object-contain w-auto"
-            src={"/img/logo.png"}
-            height={40}
-            width={40}
-            alt="logo"
-          />
-          <p className="text-center items-center flex pt-[0.6rem] select-none	">
-            Zoné
-          </p>
-        </div>
+        <Link href="/">
+          <div className="hover:scale-[1.1] transition-all gap-2 font-[700] text-[1.4rem] flex flex-row h-[2.2rem] cursor-pointer">
+            <Image
+              className="object-contain w-auto"
+              src={"/img/logo.png"}
+              height={40}
+              width={40}
+              alt="logo"
+            />
+            <p className="text-center items-center flex pt-[0.6rem] select-none	">
+              Zoné
+            </p>
+          </div>{" "}
+        </Link>
+
         <ul className="flex flex-row gap-[3rem] text-[.9rem] text-[#808080] font-[500] text-center items-center flex pt-[0.5rem] select-none	">
-          <li className="cursor-pointer">
+          <li className="cursor-pointer hover:text-[1.1rem] transition-all	duration-100">
             <Link href="/">Home </Link>
           </li>
-          <li className="cursor-pointer">
+          <li className="cursor-pointer  hover:text-[1.1rem] transition-all	duration-100">
             <Link href="/menu">Menu </Link>
           </li>
           <li
             onClick={() => toggleClass("contact-us", "none", "toggle")}
-            className="cursor-pointer"
+            className="cursor-pointer  hover:text-[1.1rem] transition-all	duration-100"
           >
             Contact us
           </li>
@@ -696,7 +699,7 @@ export default function Nav() {
           {status === "authenticated" ? (
             <>
               <div
-                className="cursor-pointer relative mt-[.3rem]"
+                className="cursor-pointer relative mt-[.3rem] hover:scale-[1.1] transition-all "
                 onClick={toggleInvisibleClass}
               >
                 <ShopBagSvg />
@@ -704,7 +707,7 @@ export default function Nav() {
                   {cartItems.length}
                 </div>
               </div>
-              <div className="profile-box flex flex-row items-center cursor-pointer relative">
+              <div className="profile-box flex flex-row items-center cursor-pointer relative hover:scale-[1.1] transition-all ">
                 <div className="z-[3] profile-list top-[2.5rem] flex flex-col absolute w-[20rem] rounded-md bg-[#e0f5ff] right-[-5rem] font-[480] shadow-xl">
                   <div className="px-10 py-[.4rem] cursor-text rounded-t-md">
                     <p>{name}</p>

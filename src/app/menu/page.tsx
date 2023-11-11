@@ -297,7 +297,7 @@ function ItemsToBuy({
     <div className="relative gap-2 min-w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
       <div className=" absolute backdrop-blur-[3px] drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
       <Image
-        className="absolute block h-[8rem] w-auto bottom-[6.5rem] "
+        className="absolute block h-[8rem] w-auto bottom-[6.5rem] hover:scale-[1.1] transition-all	"
         src={imgSrc}
         height={130}
         width={130}
@@ -320,10 +320,10 @@ function ItemsToBuy({
             router.push("/sign-in");
           }
         }}
-        className="select-none cursor-pointer bottom-[-2rem] absolute rounded-[50%] bg-red-500 p-3"
+        className="select-none cursor-pointer bottom-[-2rem] absolute rounded-[50%] bg-red-500 p-3 hover:scale-[1.1] transition-all	"
       >
         <Image
-          className="w-6"
+          className="w-6 "
           src={"/img/addToCart.png"}
           height={40}
           width={40}

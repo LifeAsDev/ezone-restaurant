@@ -163,7 +163,7 @@ export default function Home() {
                 <div className="relative w-full">
                   <div
                     onClick={removeSelectedImage}
-                    className="cursor-pointer p-[.5rem] rounded-[50%] absolute flex justify-center items-center right-[15px] bottom-[15px] w-[3rem] h-[3rem] bg-red-500"
+                    className="active:scale-[1.1] transition-all  cursor-pointer p-[.5rem] rounded-[50%] absolute flex justify-center items-center right-[15px] bottom-[15px] w-[3rem] h-[3rem] bg-red-500"
                   >
                     <DeleteIcon />
                   </div>
@@ -194,7 +194,7 @@ export default function Home() {
               <button
                 type="submit"
                 disabled={imgURL === ""}
-                className={`w-[70%] outline-none flex justify-center items-center shadow-e font-[600] box-border mt-3 h-[48px] text-white rounded-[50px] bg-greenn p-[.5rem] ${
+                className={`active:scale-[1.05] transition-all  w-[70%] outline-none flex justify-center items-center shadow-e font-[600] box-border mt-3 h-[48px] text-white rounded-[50px] bg-greenn p-[.5rem] ${
                   imgURL === "" || loadingImg < 99
                     ? "saturate-[.3] cursor-not-allowed	  "
                     : ""
@@ -205,7 +205,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => signOut()}
-                className={`w-[30%] outline-none font-[600] flex justify-center items-center shadow-red box-border mt-3 h-[48px] text-white rounded-[50px] bg-red-500 p-[.5rem]`}
+                className={`active:scale-[1.05] transition-all  w-[30%] outline-none font-[600] flex justify-center items-center shadow-red box-border mt-3 h-[48px] text-white rounded-[50px] bg-red-500 p-[.5rem]`}
               >
                 SIGN OUT
               </button>

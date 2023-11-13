@@ -27,8 +27,8 @@ export default function Home() {
   return (
     <main>
       <section className="pt-[6.5rem] px-[2rem]">
-        <div className="flex flex-row gap-[0.65rem]">
-          <div className="w-[50%] flex flex-col gap-3 justify-center">
+        <div className="flex flex-col md:flex-row gap-[0.65rem]">
+          <div className="md:w-[50%] w-full flex flex-col gap-3 justify-center">
             <div className="w-[11.30rem] gap-[.5rem] h-[2.5rem] bg-[#cdfac0] rounded-full flex items-center px-[.80rem]">
               <p className="text-[#46cc21] font-[700]">Bike Delivery</p>
               <div className="bg-white rounded-[50%] w-[2rem] h-[2rem] flex justify-center items-center">
@@ -50,21 +50,21 @@ export default function Home() {
               repudiandae accusamus aut exercitationem nisi non doloribus!
               Temporibus officia architecto reiciendis blanditiis.
             </p>
-            <div className="select-none cursor-pointer mt-[1rem] bg-[#46cc21] block p-[.8rem] py-[.6rem] rounded-md w-[7.25rem] hover:scale-[1.075] transition-all	">
+            <div className="mb-8 select-none cursor-pointer mt-[1rem] bg-[#46cc21] block p-[.8rem] py-[.6rem] rounded-md md:w-[7.25rem] w-full text-center hover:scale-[1.075] transition-all	">
               Order Now
             </div>
           </div>
-          <div className="w-[50%] relative">
+          <div className="w-full md:w-[50%] relative ">
             <Image
               priority
-              className="rounded-[20px]  z-[-1]  ml-auto lg:h-[550px] h-[420px] w-full lg:w-auto right-0"
+              className="rounded-[20px]  z-[-1] max-[462px]:h-[1000px]  ml-auto lg:h-[550px] h-[500px] w-full lg:w-auto right-0"
               src={"/img/hero.jpg"}
               height={736}
               width={460}
               alt="motorcycle delivery"
             />
-            <div className="w-[344px] z-[1] absolute gradient-transparent rounded-[20px] ml-auto lg:h-[550px] h-[420px] top-0 right-0"></div>
-            <div className="absolute z-[1] w-full h-full flex flex-wrap justify-center items-center gap-hero top-0">
+            <div className="w-full md:w-[344px] z-[1] absolute gradient-transparent rounded-[20px] ml-auto h-full lg:h-[550px] h-[420px] top-0 right-0"></div>
+            <div className="absolute z-[1] w-full h-full flex flex-wrap justify-center items-center gap-hero top-0 gap-y-0">
               {products ? (
                 <>
                   <ItemsToBuy
@@ -184,7 +184,7 @@ export default function Home() {
             Our Sizzling Dishes
           </h2>
         </div>
-        <div className="mt-10 flex flex-row mb-12 justify-center gap-8">
+        <div className=" flex-wrap	 mt-10 flex flex-row mb-12 justify-center gap-8">
           <CategoryButton
             setCategorySelected={setCategorySelected}
             selected={categorySelected}
@@ -434,7 +434,7 @@ function CategoryButton({
       <div className="bg-[#e80013] w-[2.5rem] h-[2.5rem] rounded-[50%] flex justify-center items-center">
         {children}
       </div>
-      <p className=" font-[400]">{name}</p>
+      <p className=" font-[400] text-center">{name}</p>
     </div>
   );
 }

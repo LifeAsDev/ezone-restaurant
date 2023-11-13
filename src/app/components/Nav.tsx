@@ -69,7 +69,7 @@ export default function Nav() {
       </div>
       <div
         id="cart-list"
-        className="opacity-0 invisible bg-white fixed top-0 h-[100vh] w-[25%] z-[3] right-[-20%] p-6 px-0"
+        className="opacity-0 invisible bg-white fixed top-0 h-[100vh]  md:w-[23rem] w-[100vw]  z-[3] right-[-11.5rem] p-6 px-0"
       >
         {checkPay ? (
           <>

@@ -14,19 +14,17 @@ const handler = NextAuth({
 
         await connectMongoDB();
 
-        console.log("userCreated");
-
         const userExist1 = await User.findOne({
           email: email?.toUpperCase(),
         }).select("email name");
 
         if (userExist1) {
-          if (userExist1.name === " ") {
-            return true;
-          }
+          console.log("user existed logging");
 
-          return false;
+          return true;
         } else {
+          console.log("user created");
+
           User.create({
             name: email?.toUpperCase(),
             email: email?.toUpperCase(),

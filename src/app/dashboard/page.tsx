@@ -121,7 +121,7 @@ export default function Home() {
   }
 
   return (
-    <main className="mt-[5rem] flex  flex-col items-center justify-center p-4 gap-4">
+    <main className="pt-[6rem] flex  flex-col items-center justify-center p-4 gap-4">
       <h2 className="text-[2rem] font-extrabold">DASHBOARD</h2>
       {session ? (
         <div className="bg-white border w-full  md:w-[500px] flex border-gray-300 items-center rounded-lg p-4 pb-6 flex-col justify-center gap-4 mg:mt-10">

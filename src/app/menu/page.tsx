@@ -14,13 +14,13 @@ export default function Home() {
 
   return (
     <main>
-      <section className="mt-28 px-[2rem]">
+      <section className="pt-28 px-[2rem]">
         <div className="w-full flex items-center justify-center">
           <h2 className="text-[1.5rem] font-[400] relative before:absolute before:rounded before:content before:w-32 before:h-1 before:-bottom-2 before:left-12 before:bg-[#46cc21] before:items-center		 text-center">
             Our Sizzling Dishes
           </h2>
         </div>
-        <div className="mt-10 flex flex-row mb-12 justify-center gap-8">
+        <div className="mt-10 flex flex-row mb-12 justify-center gap-8 flex-wrap">
           <CategoryButton
             setCategorySelected={setCategorySelected}
             selected={categorySelected}

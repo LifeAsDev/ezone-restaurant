@@ -50,7 +50,10 @@ export default function Nav() {
   };
   return (
     <>
-      <div className="fixed w-full h-full backdrop-blur-[24px] white-transparent z-[4]">
+      <div
+        id="menu-hamburguer"
+        className="md:hidden none fixed w-full h-full backdrop-blur-[24px] white-transparent z-[3]"
+      >
         <div className="flex flex-col p-12  gap-24 items-center">
           <div className="flex flex-row justify-between w-full">
             <div
@@ -63,6 +66,7 @@ export default function Nav() {
               </div>
             </div>
             <Image
+              onClick={() => toggleClass("menu-hamburguer", "none", "toggle")}
               width={48}
               height={48}
               src={"img/CloseBold.svg"}
@@ -70,10 +74,16 @@ export default function Nav() {
             ></Image>
           </div>
           <ul className="flex  flex flex-col gap-[3rem] text-[.9rem] text-[#808080] font-[500] text-center items-center flex pt-[0.5rem] select-none	">
-            <li className="cursor-pointer hover:text-[1.1rem] transition-all	duration-100">
+            <li
+              onClick={() => toggleClass("menu-hamburguer", "none", "toggle")}
+              className="cursor-pointer hover:text-[1.1rem] transition-all	duration-100"
+            >
               <Link href="/">Home </Link>
             </li>
-            <li className="cursor-pointer  hover:text-[1.1rem] transition-all	duration-100">
+            <li
+              onClick={() => toggleClass("menu-hamburguer", "none", "toggle")}
+              className="cursor-pointer  hover:text-[1.1rem] transition-all	duration-100"
+            >
               <Link href="/menu">Menu </Link>
             </li>
             <li
@@ -714,8 +724,9 @@ export default function Nav() {
           </p>
         </div>
       </div>
-      <nav className="top-0 white-transparent backdrop-blur px-[3rem] md:px-[6rem] py-[1.5rem] pt-[1.2rem] w-full fixed flex flex-row justify-between z-[2]">
+      <nav className="top-0 white-transparent items-center backdrop-blur px-[3rem] md:px-[6rem] py-[1.5rem] pt-[1.2rem] w-full fixed flex flex-row justify-between z-[2]">
         <Image
+          onClick={() => toggleClass("menu-hamburguer", "none", "toggle")}
           className="md:hidden"
           src={"/img/menuAlt.svg"}
           width={48}
@@ -874,7 +885,7 @@ export default function Nav() {
               </div>
             </>
           ) : (
-            <div className="flex  gap-2">
+            <div className="flex gap-2 max-[480px]:flex-col">
               <Link href="/sign-in">
                 <div className="select-none cursor-pointer px-[1rem] text-center py-[.25rem] gap-[.5rem] font-[500] flex flex-row border-[1px] rounded-md  ">
                   <LoginSvg />

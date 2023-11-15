@@ -50,6 +50,55 @@ export default function Nav() {
   };
   return (
     <>
+      <div className="fixed w-full h-full backdrop-blur-[24px] white-transparent z-[4]">
+        <div className="flex flex-col p-12  gap-24 items-center">
+          <div className="flex flex-row justify-between w-full">
+            <div
+              className="block cursor-pointer relative mt-[.3rem] hover:scale-[1.7] scale-[1.5] transition-all flex items-center"
+              onClick={toggleInvisibleClass}
+            >
+              <ShopBagSvg />
+              <div className="absolute top-[-.1rem] right-[-.9rem] bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
+                {cartItems.length}
+              </div>
+            </div>
+            <Image
+              width={48}
+              height={48}
+              src={"img/CloseBold.svg"}
+              alt="close"
+            ></Image>
+          </div>
+          <ul className="flex  flex flex-col gap-[3rem] text-[.9rem] text-[#808080] font-[500] text-center items-center flex pt-[0.5rem] select-none	">
+            <li className="cursor-pointer hover:text-[1.1rem] transition-all	duration-100">
+              <Link href="/">Home </Link>
+            </li>
+            <li className="cursor-pointer  hover:text-[1.1rem] transition-all	duration-100">
+              <Link href="/menu">Menu </Link>
+            </li>
+            <li
+              onClick={() => toggleClass("contact-us", "none", "toggle")}
+              className="cursor-pointer  hover:text-[1.1rem] transition-all	duration-100"
+            >
+              Contact us
+            </li>
+          </ul>
+          <Link href="/">
+            <div className="hover:scale-[1.1] transition-all gap-2 font-[700] text-[1.4rem] flex flex-row h-[2.2rem] cursor-pointer">
+              <Image
+                className="object-contain w-auto"
+                src={"/img/logo.png"}
+                height={40}
+                width={40}
+                alt="logo"
+              />
+              <p className="text-center items-center flex pt-[0.6rem] select-none	">
+                Zoné
+              </p>
+            </div>
+          </Link>
+        </div>
+      </div>
       <div
         onClick={() => toggleClass("complete-order", "none", "add")}
         id="complete-order"
@@ -665,7 +714,14 @@ export default function Nav() {
           </p>
         </div>
       </div>
-      <nav className="top-0 white-transparent backdrop-blur px-[6rem] py-[1.5rem] pt-[1.2rem] w-full fixed flex flex-row justify-between z-[2]">
+      <nav className="top-0 white-transparent backdrop-blur px-[3rem] md:px-[6rem] py-[1.5rem] pt-[1.2rem] w-full fixed flex flex-row justify-between z-[2]">
+        <Image
+          className="md:hidden"
+          src={"/img/menuAlt.svg"}
+          width={48}
+          height={48}
+          alt="Picture of the author"
+        />
         <Link href="/">
           <div className="hover:scale-[1.1] transition-all gap-2 font-[700] text-[1.4rem] flex flex-row h-[2.2rem] cursor-pointer">
             <Image
@@ -678,10 +734,10 @@ export default function Nav() {
             <p className="text-center items-center flex pt-[0.6rem] select-none	">
               Zoné
             </p>
-          </div>{" "}
+          </div>
         </Link>
 
-        <ul className="flex flex-row gap-[3rem] text-[.9rem] text-[#808080] font-[500] text-center items-center flex pt-[0.5rem] select-none	">
+        <ul className="hidden md:flex  flex flex-row gap-[3rem] text-[.9rem] text-[#808080] font-[500] text-center items-center flex pt-[0.5rem] select-none	">
           <li className="cursor-pointer hover:text-[1.1rem] transition-all	duration-100">
             <Link href="/">Home </Link>
           </li>
@@ -699,7 +755,7 @@ export default function Nav() {
           {status === "authenticated" ? (
             <>
               <div
-                className="cursor-pointer relative mt-[.3rem] hover:scale-[1.1] transition-all "
+                className="hidden md:block cursor-pointer relative mt-[.3rem] hover:scale-[1.1] transition-all "
                 onClick={toggleInvisibleClass}
               >
                 <ShopBagSvg />

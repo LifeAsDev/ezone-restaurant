@@ -96,12 +96,16 @@ export const OnboardingProvider = ({
           arrayDesordenado[i],
         ];
       }
+      arrayDesordenado.forEach((element, index) => {
+        element.id = index + 1;
+      });
       return arrayDesordenado;
     }
 
     // Llama a desordenarArray() y establece reorderedProducts al cargar la página
     setReorderedProducts(desordenarArray(products));
   }, [products]);
+
   const cartFunctions = (
     method: string,
     methodParam: { item: string; operation: string }

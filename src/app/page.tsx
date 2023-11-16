@@ -61,7 +61,7 @@ export default function Home() {
               src={"/img/hero.jpg"}
               height={736}
               width={460}
-              alt="motorcycle delivery"
+              alt="hero"
             />
             <div className="w-full w-full z-[1] absolute gradient-transparent rounded-[20px] ml-auto h-full lg:h-[550px] h-[420px] top-0 right-0"></div>
             <div className="w-[90%] absolute z-[1] h-full flex flex-wrap justify-center items-center gap-hero top-0 gap-y-0">
@@ -517,7 +517,7 @@ function ItemsToBuy({
         src={imgSrc}
         height={130}
         width={130}
-        alt="motorcycle delivery"
+        alt={name}
       />
       <p className="z-[0] mt-24 text-[#545454] font-[650] text-[1rem]">
         {name}
@@ -543,7 +543,7 @@ function ItemsToBuy({
           src={"/img/addToCart.png"}
           height={40}
           width={40}
-          alt="logo"
+          alt="add to cart"
         />
       </div>
     </div>

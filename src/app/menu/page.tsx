@@ -199,28 +199,23 @@ export default function Home() {
                     imgSrc: string;
                     description: string;
                     category: string;
+                    id: number;
                   }) => {
                     return (
-                      <motion.div
+                      <ItemsToBuy
+                        status={status}
+                        addToCart={() =>
+                          cartFunctions("add", {
+                            item: item.name,
+                          })
+                        }
                         key={item.name}
-                        layout
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                      >
-                        <ItemsToBuy
-                          status={status}
-                          addToCart={() =>
-                            cartFunctions("add", {
-                              item: item.name,
-                            })
-                          }
-                          key={item.name}
-                          imgSrc={item.imgSrc}
-                          name={item.name}
-                          price={item.price}
-                          description={item.description}
-                        />
-                      </motion.div>
+                        imgSrc={item.imgSrc}
+                        name={item.name}
+                        price={item.price}
+                        description={item.description}
+                        id={item.id}
+                      />
                     );
                   }
                 )
@@ -282,26 +277,34 @@ interface itemsToBuy {
   price: number;
   addToCart: (item: string) => void;
   status: string;
+  id: number;
 }
 function ItemsToBuy({
   imgSrc,
   name,
   description,
   price,
+  id,
   addToCart,
   status,
 }: itemsToBuy) {
   const router = useRouter();
 
   return (
-    <div className="relative gap-2 min-w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl">
+    <motion.div
+      key={id}
+      layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="relative gap-2 min-w-[12rem] h-[13rem] flex justify-end flex-col items-center rounded-xl"
+    >
       <div className=" absolute backdrop-blur-[3px] drop-shadow-2xl white-transparent w-full h-full rounded-xl"></div>
       <Image
         className="absolute block h-[8rem] w-auto bottom-[6.5rem] hover:scale-[1.1] transition-all	"
         src={imgSrc}
         height={130}
         width={130}
-        alt="motorcycle delivery"
+        alt={name}
       />
       <p className="z-[0] mt-24 text-[#545454] font-[650] text-[1rem]">
         {name}
@@ -327,9 +330,9 @@ function ItemsToBuy({
           src={"/img/addToCart.png"}
           height={40}
           width={40}
-          alt="logo"
+          alt="add to cart"
         />
       </div>
-    </div>
+    </motion.div>
   );
 }

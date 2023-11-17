@@ -96,9 +96,7 @@ export const OnboardingProvider = ({
           arrayDesordenado[i],
         ];
       }
-      arrayDesordenado.forEach((element, index) => {
-        element.id = index + 1;
-      });
+
       return arrayDesordenado;
     }
 

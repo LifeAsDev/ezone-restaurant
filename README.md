@@ -22,7 +22,6 @@ NEXTAUTH_SECRET=MyNextAuth Secret
 NEXTAUTH_URL=http://localhost:3000
 GOOGLE_CLIENT_ID=Google Client ID
 GOOGLE_CLIENT_SECRET=Google Secret
-
 ```
 
 4. Run npm run dev in your bash / command line
